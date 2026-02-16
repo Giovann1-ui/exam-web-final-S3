@@ -87,8 +87,8 @@ $dsn = 'mysql:host=' . $config['database']['host'] . ';dbname=' . $config['datab
 
 // Register Flight::db() service
 // In development, use PdoQueryCapture to log queries; in production, use PdoWrapper for performance.
- $pdoClass = Debugger::$showBar === true ? PdoQueryCapture::class : PdoWrapper::class;
- $app->register('db', $pdoClass, [ $dsn, $config['database']['user'] ?? null, $config['database']['password'] ?? null ]);
+$pdoClass = Debugger::$showBar === true ? PdoQueryCapture::class : PdoWrapper::class;
+$app->register('db', $pdoClass, [ $dsn, $config['database']['user'] ?? null, $config['database']['password'] ?? null ]);
 
 /**********************************************
  *         Third-Party Integrations           *

@@ -1,25 +1,29 @@
 <?php
 
 use app\controllers\BesoinController;
+use app\controllers\DonsController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
 
-/** 
- * @var Router $router 
+/**
+ * @var Router $router
  * @var Engine $app
  */
-
-// This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function(Router $router) use ($app) {
 
-	$router->get('/', function() use ($app) {
-		$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
-	});
+    $router->get('/', function() use ($app) {
+        Flight::redirect('/dons');
+    });
 
-	$router->get('/hello-world/@name', function($name) {
-		echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
-	});
+    Flight::route('GET /dons', function () {
+        $controller = new DonsController();
+        $controller->getAllDons();
+    });
+
+    Flight::route('GET /dons/', function () {
+        Flight::redirect('/dons');
+    });
 
 	$router->group('/dons', function() use ($router) {
 		$router->get('/give', [ BesoinController::class, 'all_besoins' ]);
