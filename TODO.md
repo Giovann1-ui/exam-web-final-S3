@@ -18,7 +18,7 @@
     - [ ] fonction qui attribue automatiquement le don à une ville si le besoin correspond
     - [ ] redirection vers la page de gestion des dons après l'ajout
 
-- [ ] page des besoins restants par ville (similaire a celle dans dashboard) (GIOVANNI)
+- [x] page des besoins restants par ville (similaire a celle dans dashboard) (GIOVANNI)
     - [x] creation de table
         - [x] frais_achat_besoin
         - [x] achats_besoins
@@ -26,9 +26,9 @@
     - [x] ligne de besoin cliquable qui redirige vers la page de saisie des achats
     - [x] petite indication de comment acheter (ex : cliquer sur le besoin pour acheter avec les dons en argent)
     - ! normalement, on utilise par ordre d'arrive l'argent
-    - ! Si on essaye d'acheter du riz alors qu'il y a encore du riz dans le stock, on affiche une erreur
+    - [x] Si on essaye d'acheter du riz alors qu'il y a encore du riz dans le stock, on affiche une erreur
 
- - [ ] page de saisie des achats (GIOVANNI)
+ - [x] page de saisie des achats (GIOVANNI)
     - [x] afficher les informations du besoin (ville, nom du besoin, type de besoin, prix unitaire) pour aider à la saisie
     - [x] afficher argent à utiliser pour combler le besoin(ex : 1000 Ar)
     - [x] afficher argent total dispo

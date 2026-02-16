@@ -121,18 +121,16 @@ class AchatModel
     /**
      * Insère un achat dans la base de données
      */
-    public function insertAchat($besoin_ville_id, $quantite, $frais_achat_besoin_id, $date_achat)
+    public function insertAchat($besoin_ville_id, $quantite)
     {
         try {
             $stmt = $this->db->prepare("
-                INSERT INTO achats_besoins (ville_id, besoin_id, quantite, frais_achat_besoin_id, date_achat)
-                VALUES (:besoin_ville_id, :quantite, :frais_achat_besoin_id, :date_achat)
+                INSERT INTO achats_besoins (besoin_ville_id, quantite, date_achat)
+                VALUES (:besoin_ville_id, :quantite, NOW())
             ");
 
             $stmt->bindValue(':besoin_ville_id', (int) $besoin_ville_id, PDO::PARAM_INT);
             $stmt->bindValue(':quantite', (int) $quantite, PDO::PARAM_INT);
-            $stmt->bindValue(':frais_achat_besoin_id', (int) $frais_achat_besoin_id, PDO::PARAM_INT);
-            $stmt->bindValue(':date_achat', $date_achat, PDO::PARAM_STR);
 
             $stmt->execute();
             return $this->db->lastInsertId();
