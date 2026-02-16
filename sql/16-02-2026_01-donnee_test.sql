@@ -11,7 +11,7 @@ INSERT INTO types_besoin (nom_type_besoin) VALUES
 
 -- Liaison avec les IDs de types_besoin (1: Nature, 2: Matériaux, 3: Argent)
 INSERT INTO besoins (nom_besoin, prix_unitaire, type_besoin_id) VALUES 
-('Sac de Riz 50kg', 150000.00, 1),
+('Sac de Riz', 150000.00, 1),
 ('Bouteille Huile 1L', 9000.00, 1),
 ('Feuille de Tôle', 45000.00, 2),
 ('Paquet de Clous', 12000.00, 2),

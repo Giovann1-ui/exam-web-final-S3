@@ -7,8 +7,9 @@
 - [ ] page de gestion des dons (TSOA)
     - [ ] liste des dons
     - [ ] bouton vers une page pour ajouter un don
+    
 - [ ] page pour ajouter un don (MANA + GIOVANNI + TSOA)
-    - [ ] formulaire pour ajouter un don
+    - [ok] formulaire pour ajouter un don
     - [ ] validation du formulaire
     - [ ] fonction pour ajouter un don à la base de données
     - [ ] fonction qui attribue automatiquement le don à une ville si le besoin correspond
