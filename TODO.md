@@ -5,7 +5,7 @@
     - [ ] bouton vers la pges d'ajout d'un don
 
 - [ ] page de gestion des dons (TSOA)
-    - [ ] liste des dons
+    - [x] liste des dons
     - [ ] bouton vers une page pour ajouter un don
 - [ ] page pour ajouter un don (MANA + GIOVANNI + TSOA)
     - [ ] formulaire pour ajouter un don
