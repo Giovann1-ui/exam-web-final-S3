@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BNGRC - Bureau National de Gestion des Risques et Catastrophes</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="<?=$base_url?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=$base_url?>/assets/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -118,11 +118,11 @@
             </p>
             
             <div class="d-flex justify-content-center flex-wrap">
-                <a href="/dons" class="btn btn-primary btn-action">
+                <a href="<?=$base_url?>/dons" class="btn btn-primary btn-action">
                     <i class="bi bi-list-ul me-2"></i>
                     Voir les Dons
                 </a>
-                <a href="/dons/give" class="btn btn-success btn-action">
+                <a href="<?=$base_url?>/dons/give" class="btn btn-success btn-action">
                     <i class="bi bi-plus-circle me-2"></i>
                     Faire un Don
                 </a>

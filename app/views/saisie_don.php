@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enregistrement d'un Don - BNGRC</title>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="<?=$base_url?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=$base_url?>/assets/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -122,7 +122,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="<?=$base_url?>">
                 <i class="bi bi-heart-fill me-2"></i>
                 BNGRC - Gestion des Dons
             </a>
@@ -132,13 +132,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/dons">
+                        <a class="nav-link" href="<?=$base_url?>/dons">
                             <i class="bi bi-list-ul me-1"></i>
                             Liste des Dons
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/dons/give">
+                        <a class="nav-link active" href="<?=$base_url?>/dons/give">
                             <i class="bi bi-plus-circle me-1"></i>
                             Ajouter un Don
                         </a>
@@ -182,7 +182,7 @@
                 </div>
 
                 <!-- Formulaire -->
-                <form method="POST" action="/dons/add" id="donForm">
+                <form method="POST" action="<?=$base_url?>/dons/add" id="donForm">
                     
                     <!-- Donateur -->
                     <div class="mb-4">
@@ -272,7 +272,7 @@
                             <i class="bi bi-check-circle-fill me-2"></i>
                             Enregistrer et Simuler le Dispatch
                         </button>
-                        <a href="/dons" class="btn btn-outline-secondary btn-lg">
+                        <a href="<?=$base_url?>/dons" class="btn btn-outline-secondary btn-lg">
                             <i class="bi bi-arrow-left me-2"></i>
                             Retour à la liste
                         </a>

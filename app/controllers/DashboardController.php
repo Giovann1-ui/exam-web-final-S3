@@ -65,7 +65,8 @@ class DashboardController {
             'villes_satisfait' => $villesSatisfaites,
             'dons' => $donsGroupes,
             'stats' => $statistiques,
-            'page_title' => 'Dashboard - BNGRC'
+            'page_title' => 'Dashboard - BNGRC',
+            'base_url' => Flight::get('flight.base_url')
         ]);
     }
 }

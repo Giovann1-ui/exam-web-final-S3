@@ -12,7 +12,7 @@ class BesoinController {
     public function all_besoins(){
         $besoinModel = new BesoinModel(Flight::db());
         $besoins = $besoinModel->get_all_besoins();
-        Flight::render('saisie_don', ['besoins' => $besoins]);
+        Flight::render('saisie_don', ['besoins' => $besoins, 'base_url' => Flight::get('flight.base_url')]);
     }
 
     /**
@@ -21,7 +21,7 @@ class BesoinController {
     public function besoin($id){
         $besoinModel = new BesoinModel(Flight::db());
         $besoin = $besoinModel->get_besoin_by_id($id);
-        Flight::render('type-besoin', ['besoin' => $besoin]);
+        Flight::render('type-besoin', ['besoin' => $besoin, 'base_url' => Flight::get('flight.base_url')]);
     }
 }
 ?>

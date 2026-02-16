@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Liste de tous les Dons</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="<?=$base_url?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=$base_url?>/assets/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body>
 <div class="container mt-4">
@@ -38,7 +38,7 @@
             </tbody>
         </table>
     </div>
-    <a href="/dons/give" class="btn btn-primary">Inserer Dons</a>
+    <a href="<?=$base_url?>/dons/give" class="btn btn-primary">Inserer Dons</a>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

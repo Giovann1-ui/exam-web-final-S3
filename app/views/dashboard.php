@@ -8,8 +8,8 @@ $besoins_attribues = $besoins_attribues ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DASHBOARD BNGRC</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="<?=$base_url?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=$base_url?>/assets/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         :root {
             --bngrc-dark: #2c3e50;
@@ -103,9 +103,9 @@ $besoins_attribues = $besoins_attribues ?? [];
             <i class="bi bi-shield-shaded me-2"></i> BNGRC DASHBOARD
         </span>
         <div class="d-flex">
-            <!-- <a href="/villes" class="btn btn-outline-light btn-sm me-2">Villes</a> -->
-            <a href="/dons" class="btn btn-outline-light btn-sm me-2">Gérer les dons</a>
-            <a href="/dons/give" class="btn btn-primary btn-sm">Ajouter un don</a>
+            <!-- <a href="<?=$base_url?>/villes" class="btn btn-outline-light btn-sm me-2">Villes</a> -->
+            <a href="<?=$base_url?>/dons" class="btn btn-outline-light btn-sm me-2">Gérer les dons</a>
+            <a href="<?=$base_url?>/dons/give" class="btn btn-primary btn-sm">Ajouter un don</a>
         </div>
     </div>
 </nav>

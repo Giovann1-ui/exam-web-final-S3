@@ -11,7 +11,7 @@ class DonsController
     {
         $donsModel = new DonModels(Flight::db());
         $dons = $donsModel->getAllDons();
-        Flight::render('dons/index', ['dons' => $dons]);
+        Flight::render('dons/index', ['dons' => $dons, 'base_url' => Flight::get('flight.base_url')]);
     }
 
     /**
