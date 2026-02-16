@@ -37,7 +37,7 @@ $csp_nonce = $csp_nonce ?? '';
         <span>Accueil</span>
     </a>
     
-    <a href="/dashboard" class="menu-item <?= str_contains($current_page, '/dashboard') ? 'active' : '' ?>">
+    <a href="/" class="menu-item <?= str_contains($current_page, '/dashboard') ? 'active' : '' ?>">
         <i class="bi bi-speedometer2"></i>
         <span>Tableau de Bord</span>
     </a>

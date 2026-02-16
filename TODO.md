@@ -25,3 +25,31 @@
 - [ ] page de simulation (MANA)
     - [ ] bouton simuler qui permet de voir le résulat (simuler distribution pour visualier ou va les dons)
     - [ ] bouton validation qui dispatch vraiment les dons
+
+- [ ] Créer la classe `RecapModel`.
+  - [ ] **Méthode `getTotalBesoins()`** : Requête SQL `SUM(quantite * prix_unitaire)` sur `besoins_ville` + `besoins`.
+     - [ ] **Méthode `getSatisfait()`** :
+        - [ ] Somme des distributions validées.
+        - [ ] Somme des achats effectués (incluant les frais x%).
+  - [ ] **Méthode `getRecapData()`** : Retourne un tableau associatif avec `total`, `satisfait`, et `restant` (Total - Satisfait).
+
+  - [ ] Créer la méthode pour la route `/recap` : appelle `Flight::render('recap.php')`.
+    - [ ] **Méthode `getRecapJSON()`** :
+      - [ ] Instancier `RecapModel`.
+      - [ ] Récupérer les données du modèle.
+      - [ ] **json_encode** : Renvoyer les données via `Flight::json($data)`.
+
+  - [ ] **Structure HTML (Bootstrap)** :
+    - [ ] Créer 3 conteneurs (Cards) :
+      - [ ] Besoins totaux.
+      - [ ] Satisfaits.
+      - [ ] Restants.
+      - [ ] Donner un **ID unique** à chaque zone de texte (ex: `id="total-montant"`, `id="satisfait-montant"`, `id="restant-montant"`).
+      - [ ] Ajouter un bouton "Actualiser".
+
+  - [ ] **Fonction JS `refreshData()`** :
+    - [ ] Déclenchée par le clic sur le bouton "Actualiser".
+    - [ ] Utiliser `fetch('/api/recap')` (Route Flight vers le controller).
+    - [ ] Dans le `.then()`, parser le JSON.
+    - [ ] Mettre à jour le contenu HTML des cartes via `innerHTML` ou `innerText`.
+  - [ ] **Auto-load** : Ajouter l'appel à la fonction au chargement (`window.onload`).
