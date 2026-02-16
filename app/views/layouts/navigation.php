@@ -59,6 +59,16 @@ $csp_nonce = $csp_nonce ?? '';
         <span>Simulation</span>
     </a>
     
+    <a href="/historique-achats" class="menu-item <?= str_contains($current_page, '/historique-achats') ? 'active' : '' ?>">
+        <i class="bi bi-receipt"></i>
+        <span>Historique des Achats</span>
+    </a>
+    
+    <a href="/achats/besoins" class="menu-item <?= str_contains($current_page, '/achats') ? 'active' : '' ?>">
+        <i class="bi bi-cart"></i>
+        <span>Besoins à Acheter</span>
+    </a>
+    
     <div class="sidebar-section-title">Données</div>
     
     <a href="/recap" class="menu-item <?= str_contains($current_page, '/recap') ? 'active' : '' ?>">

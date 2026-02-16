@@ -30,7 +30,7 @@ $csp_nonce = $csp_nonce ?? '';
                         <th>Type Besoin</th>
                         <th>Nom Besoin</th>
                         <th style="text-align: right;">Quantité</th>
-                        <th style="text-align: right;">Restante</th>
+                        <th style="text-align: right;">Restante en stock</th>
                         <th>Date Don</th>
                     </tr>
                 </thead>
