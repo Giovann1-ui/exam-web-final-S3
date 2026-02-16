@@ -105,7 +105,7 @@ $besoins_attribues = $besoins_attribues ?? [];
         <div class="d-flex">
             <!-- <a href="/villes" class="btn btn-outline-light btn-sm me-2">Villes</a> -->
             <a href="/dons" class="btn btn-outline-light btn-sm me-2">Gérer les dons</a>
-            <a href="/dons/ajouter" class="btn btn-primary btn-sm">Ajouter un don</a>
+            <a href="/dons/give" class="btn btn-primary btn-sm">Ajouter un don</a>
         </div>
     </div>
 </nav>
