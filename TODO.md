@@ -26,12 +26,12 @@
     - [ ] bouton simuler qui permet de voir le résulat (simuler distribution pour visualier ou va les dons)
     - [ ] bouton validation qui dispatch vraiment les dons
 
-- [ ] Créer la classe `RecapModel`.
-  - [ ] **Méthode `getTotalBesoins()`** : Requête SQL `SUM(quantite * prix_unitaire)` sur `besoins_ville` + `besoins`.
-     - [ ] **Méthode `getSatisfait()`** :
-        - [ ] Somme des distributions validées.
-        - [ ] Somme des achats effectués (incluant les frais x%).
-  - [ ] **Méthode `getRecapData()`** : Retourne un tableau associatif avec `total`, `satisfait`, et `restant` (Total - Satisfait).
+- [x] Créer la classe `RecapModel`.
+  - [x] **Méthode `getTotalBesoins()`** : Requête SQL `SUM(quantite * prix_unitaire)` sur `besoins_ville` + `besoins`.
+     - [x] **Méthode `getSatisfait()`** :
+        - [x] Somme des distributions validées.
+        - [x] Somme des achats effectués (incluant les frais x%).
+  - [x] **Méthode `getRecapData()`** : Retourne un tableau associatif avec `total`, `satisfait`, et `restant` (Total - Satisfait).
 
   - [ ] Créer la méthode pour la route `/recap` : appelle `Flight::render('recap.php')`.
     - [ ] **Méthode `getRecapJSON()`** :
