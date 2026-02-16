@@ -19,15 +19,26 @@ class SecurityHeadersMiddleware
 	{
 		$nonce = $this->app->get('csp_nonce');
 
+		// Domaines CDN autorisés
+		$trustedCdns = 'https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com';
+
 		// development mode to execute Tracy debug bar CSS
 		$tracyCssBypass = "'nonce-{$nonce}'";
 		if(Debugger::$showBar === true) {
-			$tracyCssBypass = ' \'unsafe-inline\'';
+			$tracyCssBypass = "'unsafe-inline'";
 		}
 
-		$csp = "default-src 'self'; script-src 'self' 'nonce-{$nonce}' 'strict-dynamic'; style-src 'self' {$tracyCssBypass}; img-src 'self' data:;";
+		$csp = implode('; ', [
+			"default-src 'self'",
+			"script-src 'self' 'nonce-{$nonce}' 'strict-dynamic' {$trustedCdns}",
+			"style-src 'self' {$tracyCssBypass} 'unsafe-inline' {$trustedCdns}",
+			"font-src 'self' {$trustedCdns} data:",
+			"img-src 'self' data:",
+			"connect-src 'self'",
+		]);
+
 		$this->app->response()->header('X-Frame-Options', 'SAMEORIGIN');
-		$this->app->response()->header("Content-Security-Policy", $csp);
+		$this->app->response()->header('Content-Security-Policy', $csp);
 		$this->app->response()->header('X-XSS-Protection', '1; mode=block');
 		$this->app->response()->header('X-Content-Type-Options', 'nosniff');
 		$this->app->response()->header('Referrer-Policy', 'no-referrer-when-downgrade');
