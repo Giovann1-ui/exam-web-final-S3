@@ -14,7 +14,7 @@ use flight\net\Router;
  */
 $router->group('', function(Router $router) use ($app) {
 
-	$router->get('/', [DashboardController::class, 'index']);
+    $router->get('/', [DashboardController::class, 'index']);
 
     Flight::route('GET /dons', function () {
         $controller = new DonsController();
