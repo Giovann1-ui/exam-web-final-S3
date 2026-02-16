@@ -15,7 +15,19 @@ class DonModels
 
     public function getAllDons()
     {
-        $stmt = $this->db->query("SELECT nom_donneur, quantite, quantite_restante, date_don FROM dons ORDER BY date_don");
+        $stmt = $this->db->query("
+            SELECT 
+                d.nom_donneur, 
+                d.quantite, 
+                d.quantite_restante, 
+                d.date_don,
+                b.nom_besoin,
+                tb.nom_type_besoin
+            FROM dons d
+            JOIN besoins b ON d.besoin_id = b.id
+            JOIN types_besoin tb ON b.type_besoin_id = tb.id
+            ORDER BY d.date_don
+        ");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -29,15 +41,15 @@ class DonModels
                 INSERT INTO dons (nom_donneur, besoin_id, quantite, quantite_restante, date_don) 
                 VALUES (:nom_donneur, :besoin_id, :quantite, :quantite_restante, :date_don)
             ");
-            
+
             $stmt->bindValue(':nom_donneur', $nom_donneur, PDO::PARAM_STR);
-            $stmt->bindValue(':besoin_id', (int)$besoin_id, PDO::PARAM_INT);
-            $stmt->bindValue(':quantite', (int)$quantite, PDO::PARAM_INT);
-            $stmt->bindValue(':quantite_restante', (int)$quantite, PDO::PARAM_INT);
+            $stmt->bindValue(':besoin_id', (int) $besoin_id, PDO::PARAM_INT);
+            $stmt->bindValue(':quantite', (int) $quantite, PDO::PARAM_INT);
+            $stmt->bindValue(':quantite_restante', (int) $quantite, PDO::PARAM_INT);
             $stmt->bindValue(':date_don', $date_don, PDO::PARAM_STR);
-            
+
             $stmt->execute();
-            
+
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
             error_log("Erreur lors de l'insertion du don: " . $e->getMessage());
@@ -60,10 +72,10 @@ class DonModels
               AND bv.quantite_restante > 0
             ORDER BY bv.date_besoin ASC, bv.id ASC
         ");
-        
-        $stmt->bindValue(':besoin_id', (int)$besoin_id, PDO::PARAM_INT);
+
+        $stmt->bindValue(':besoin_id', (int) $besoin_id, PDO::PARAM_INT);
         $stmt->execute();
-        
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -77,10 +89,10 @@ class DonModels
             SET quantite_restante = :quantite_restante 
             WHERE id = :id
         ");
-        
-        $stmt->bindValue(':quantite_restante', (int)$nouvelle_quantite_restante, PDO::PARAM_INT);
-        $stmt->bindValue(':id', (int)$besoin_ville_id, PDO::PARAM_INT);
-        
+
+        $stmt->bindValue(':quantite_restante', (int) $nouvelle_quantite_restante, PDO::PARAM_INT);
+        $stmt->bindValue(':id', (int) $besoin_ville_id, PDO::PARAM_INT);
+
         return $stmt->execute();
     }
 
@@ -94,10 +106,10 @@ class DonModels
             SET quantite_restante = :quantite_restante 
             WHERE id = :id
         ");
-        
-        $stmt->bindValue(':quantite_restante', (int)$nouvelle_quantite_restante, PDO::PARAM_INT);
-        $stmt->bindValue(':id', (int)$don_id, PDO::PARAM_INT);
-        
+
+        $stmt->bindValue(':quantite_restante', (int) $nouvelle_quantite_restante, PDO::PARAM_INT);
+        $stmt->bindValue(':id', (int) $don_id, PDO::PARAM_INT);
+
         return $stmt->execute();
     }
 
@@ -110,12 +122,12 @@ class DonModels
             INSERT INTO distributions (id_ville, besoin_id, quantite, date_distribution) 
             VALUES (:id_ville, :besoin_id, :quantite, :date_distribution)
         ");
-        
-        $stmt->bindValue(':id_ville', (int)$ville_id, PDO::PARAM_INT);
-        $stmt->bindValue(':besoin_id', (int)$besoin_id, PDO::PARAM_INT);
-        $stmt->bindValue(':quantite', (int)$quantite, PDO::PARAM_INT);
+
+        $stmt->bindValue(':id_ville', (int) $ville_id, PDO::PARAM_INT);
+        $stmt->bindValue(':besoin_id', (int) $besoin_id, PDO::PARAM_INT);
+        $stmt->bindValue(':quantite', (int) $quantite, PDO::PARAM_INT);
         $stmt->bindValue(':date_distribution', $date_distribution, PDO::PARAM_STR);
-        
+
         return $stmt->execute();
     }
 }
