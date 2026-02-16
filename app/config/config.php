@@ -68,8 +68,8 @@ return [
 	'database' => [
 		// MySQL Example:
 		'host'     => 'localhost:3306',      // Database host (e.g., 'localhost', 'db.example.com')
-		'dbname'   => 'db_s2_ETU003946',   // Database name (e.g., 'flightphp')
-		'user'     => 'ETU004055',  // Database user (e.g., 'root')
+		'dbname'   => 'bngrc',   // Database name (e.g., 'flightphp')
+		'user'     => 'root',  // Database user (e.g., 'root')
 		'password' => '',  // Database password (never commit real passwords)
 
 		// SQLite Example:

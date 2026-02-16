@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\BesoinVille;
 use flight\Engine;
+use Flight;
 
 class DashboardController {
     protected Engine $app;
