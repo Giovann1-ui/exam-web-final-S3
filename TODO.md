@@ -1,11 +1,11 @@
-- [ ] page dashboard (GIOVANNI)
-    - [ ] liste des villes avec les besoins
-        - [ ] fonction pour récupérer les villes et leurs besoins depuis la base de données
-        - [ ] controller besoinVille
-        - [ ] modele besoinVille
-    - [ ] les dons attribués chaque ville
-    - [ ] bouton vers la page de gestion des dons
-    - [ ] bouton vers la pges d'ajout d'un don
+- [x] page dashboard (GIOVANNI)
+    - [x] liste des villes avec les besoins
+        - [x] fonction pour récupérer les villes et leurs besoins depuis la base de données
+        - [x] controller besoinVille
+        - [x] modele besoinVille
+    - [x] les dons attribués chaque ville
+    - [x] bouton vers la page de gestion des dons
+    - [x] bouton vers la pges d'ajout d'un don
 
 - [x] page de gestion des dons (TSOA)
     - [x] liste des dons
