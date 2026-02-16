@@ -7,12 +7,19 @@ use Flight;
 class BesoinController {
 
     /**
-     * Affiche tous les objets avec leurs propriétaires
+     * Affiche tous les besoins avec leurs propriétaires
      */
     public function all_besoins(){
         $besoinModel = new BesoinModel(Flight::db());
         $besoins = $besoinModel->get_all_besoins();
-        Flight::render('saisie_don', ['besoins' => $besoins, 'base_url' => Flight::get('flight.base_url')]);
+        
+        // Récupérer le nonce CSP depuis l'application
+        $csp_nonce = Flight::get('csp_nonce');
+        
+        Flight::render('saisie_don', [
+            'besoins' => $besoins,
+            'csp_nonce' => $csp_nonce
+        ]);
     }
 
     /**
@@ -21,7 +28,14 @@ class BesoinController {
     public function besoin($id){
         $besoinModel = new BesoinModel(Flight::db());
         $besoin = $besoinModel->get_besoin_by_id($id);
-        Flight::render('type-besoin', ['besoin' => $besoin, 'base_url' => Flight::get('flight.base_url')]);
+        
+        // Récupérer le nonce CSP depuis l'application
+        $csp_nonce = Flight::get('csp_nonce');
+        
+        Flight::render('type-besoin', [
+            'besoin' => $besoin,
+            'csp_nonce' => $csp_nonce
+        ]);
     }
 }
 ?>

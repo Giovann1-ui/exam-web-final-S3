@@ -1,6 +1,8 @@
--- CREATE DATABASE bngrc;
+DROP DATABASE bngrc;
 
--- USE bngrc;
+CREATE DATABASE bngrc;
+
+USE bngrc;
 
 DROP TABLE IF EXISTS distributions;
 DROP TABLE IF EXISTS dons;
@@ -8,6 +10,8 @@ DROP TABLE IF EXISTS besoins;
 DROP TABLE IF EXISTS types_besoin;
 DROP TABLE IF EXISTS besoins_ville;
 DROP TABLE IF EXISTS villes;
+
+DROP TABLE IF EXISTS frais_achat_besoin;
 
 CREATE TABLE villes (
     id int AUTO_INCREMENT PRIMARY KEY,
@@ -33,7 +37,7 @@ CREATE TABLE besoins_ville (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_besoin DATE NOT NULL DEFAULT (CURRENT_DATE),
+    date_besoin DATE NOT NULL DEFAULT CURRENT_DATE,
     FOREIGN KEY (ville_id) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -44,7 +48,7 @@ CREATE TABLE dons (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_don DATE NOT NULL DEFAULT (CURRENT_DATE),
+    date_don DATE NOT NULL DEFAULT CURRENT_DATE,
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
 
@@ -53,9 +57,24 @@ CREATE TABLE distributions (
     id_ville int NOT NULL,
     besoin_id int NOT NULL,
     quantite int NOT NULL,
-    date_distribution DATE NOT NULL DEFAULT (CURRENT_DATE),
+    date_distribution DATE NOT NULL DEFAULT CURRENT_DATE,
     FOREIGN KEY (id_ville) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
+);
+
+CREATE TABLE frais_achat_besoin (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    besoin_id int NOT NULL,
+    frais DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (besoin_id) REFERENCES besoins(id)
+);
+
+CREATE TABLE achats_besoins (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    besoin_ville_id int NOT NULL,
+    quantite int NOT NULL,
+    date_achat DATE NOT NULL DEFAULT CURRENT_DATE,
+    FOREIGN KEY (besoin_ville_id) REFERENCES besoins_ville(id)
 );
 
 INSERT INTO villes (id, nom_ville) VALUES
@@ -82,19 +101,25 @@ INSERT INTO besoins_ville (ville_id, besoin_id, quantite, quantite_restante) VAL
 (3, 2, 100, 100),
 (3, 3, 400, 400);
 
-SELECT 
-                    v.id AS ville_id,
-                    v.nom_ville,
-                    b.id AS besoin_id,
-                    b.nom_besoin,
-                    b.prix_unitaire,
-                    tb.nom_type_besoin,
-                    bv.quantite AS quantite_initiale,
-                    (bv.quantite - bv.quantite_restante) AS quantite_attribuee,
-                    bv.date_besoin
-                FROM villes v
-                JOIN besoins_ville bv ON v.id = bv.ville_id
-                JOIN besoins b ON b.id = bv.besoin_id
-                JOIN types_besoin tb ON b.type_besoin_id = tb.id
-                WHERE (bv.quantite - bv.quantite_restante) > 0
-                ORDER BY v.nom_ville, b.nom_besoin;
+INSERT INTO frais_achat_besoin (besoin_id, frais) VALUES
+(1, 10), -- Frais pour le riz
+(2, 20), -- Frais pour la tôle
+(3, 0); -- Frais pour l'argent
+
+INSERT INTO achats_besoins (besoin_ville_id, quantite) VALUES
+(1, 50), -- Achat de 50 unités de riz pour Ville A
+(2, 30), -- Achat de 30 unités de tôle pour Ville B
+(3, 100); -- Achat de 100 unités d'argent pour Ville C
+
+INSERT INTO dons (nom_donneur, besoin_id, quantite, quantite_restante) VALUES
+('Donateur 1', 1, 50, 50);
+
+CREATE OR REPLACE VIEW v_historique_achats_besoins AS
+(SELECT a.date_achat, v.nom_ville, b.nom_besoin, tb.nom_type_besoin, a.quantite, b.prix_unitaire, f.frais,
+       (a.quantite * b.prix_unitaire * (1 + f.frais/100)) AS total_paye
+FROM achats_besoins a
+JOIN besoins_ville bv ON a.besoin_ville_id = bv.id
+JOIN villes v ON bv.ville_id = v.id
+JOIN besoins b ON bv.besoin_id = b.id
+JOIN types_besoin tb ON b.type_besoin_id = tb.id
+JOIN frais_achat_besoin f ON b.id = f.besoin_id);

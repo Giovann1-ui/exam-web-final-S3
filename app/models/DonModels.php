@@ -58,24 +58,38 @@ class DonModels
     }
 
     /**
-     * Récupère tous les besoins des villes pour un type de besoin donné
-     * Ordonnés par date de besoin (les plus anciens en premier)
+     * Récupère tous les dons avec quantité restante > 0
+     */
+    public function getDonsNonDistribues()
+    {
+        $stmt = $this->db->prepare("
+            SELECT d.*, b.nom_besoin, tb.nom_type_besoin
+            FROM dons d
+            INNER JOIN besoins b ON d.besoin_id = b.id
+            INNER JOIN types_besoin tb ON b.type_besoin_id = tb.id
+            WHERE d.quantite_restante > 0
+            ORDER BY d.date_don ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Récupère les besoins des villes avec les noms pour la simulation
      */
     public function getBesoinsVilleByBesoinId($besoin_id)
     {
         $stmt = $this->db->prepare("
-            SELECT bv.id, bv.ville_id, bv.besoin_id, bv.quantite, bv.quantite_restante, 
-                   bv.date_besoin, v.nom_ville
+            SELECT bv.*, v.nom_ville, b.nom_besoin
             FROM besoins_ville bv
             INNER JOIN villes v ON bv.ville_id = v.id
-            WHERE bv.besoin_id = :besoin_id 
-              AND bv.quantite_restante > 0
-            ORDER BY bv.date_besoin ASC, bv.id ASC
+            INNER JOIN besoins b ON bv.besoin_id = b.id
+            WHERE bv.besoin_id = :besoin_id
+            AND bv.quantite_restante > 0
+            ORDER BY bv.date_besoin ASC
         ");
-
         $stmt->bindValue(':besoin_id', (int) $besoin_id, PDO::PARAM_INT);
         $stmt->execute();
-
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

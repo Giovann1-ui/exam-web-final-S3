@@ -1,180 +1,155 @@
 <?php
 $villes_satisfait = $villes_satisfait ?? [];
 $besoins_attribues = $besoins_attribues ?? [];
+$csp_nonce = $csp_nonce ?? '';
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DASHBOARD BNGRC</title>
-    <link href="<?=$base_url?>/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?=$base_url?>/assets/bootstrap-icons/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --bngrc-dark: #2c3e50;
-            --bngrc-light: #f8f9fa;
-            --bngrc-success: #198754;
-        }
+<?php include __DIR__ . '/layouts/navigation.php'; ?>
 
-        body {
-            background-color: #f4f7f6;
-            color: #333;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+<title>Tableau de Bord - BNGRC</title>
+ <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/bootstrap-icons/font/bootstrap-icons.css">
+<style nonce="<?= $csp_nonce ?>">
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--border-color);
+    }
+    
+    .section-header h4 {
+        margin: 0;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .ville-group {
+        margin-bottom: 30px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .ville-header {
+        background-color: var(--light-bg);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .ville-header h5 {
+        margin: 0;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    
+    .badge-pill {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    
+    .badge-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+    
+    .badge-success {
+        background-color: #d1f2eb;
+        color: #0c5e4c;
+    }
+    
+    .list-group-item {
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px;
+    }
+    
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+</style>
 
-        .navbar-brand {
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .stat-card {
-            border: none;
-            border-left: 4px solid #0d6efd;
-            transition: transform 0.2s;
-        }
-
-        .stat-card:hover { transform: translateY(-3px); }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--bngrc-dark);
-        }
-
-        .stat-label {
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            color: #6c757d;
-        }
-
-        .section-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .table thead th {
-            background-color: var(--bngrc-light);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            color: #495057;
-        }
-
-        .progress { height: 12px; border-radius: 10px; }
-
-        .badge-nature { background-color: #d1e7dd; color: #0f5132; }
-        .badge-materiaux { background-color: #fff3cd; color: #664d03; }
-        .badge-argent { background-color: #cff4fc; color: #055160; }
-
-        .ville-header {
-            border-bottom: 2px solid #dee2e6;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-        }
-
-        .card-satisfied {
-            border: 1px solid #d1e7dd;
-            background-color: #fafffd;
-            border-radius: 10px;
-        }
-        .icon-satisfied {
-            color: var(--bngrc-success);
-            font-size: 1.5rem;
-        }
-
-        /* Style pour les besoins attribués */
-        .table-attribues {
-            background-color: #f8fff9;
-        }
-        .table-attribues tbody tr {
-            border-left: 3px solid var(--bngrc-success);
-        }
-    </style>
-</head>
-<body>
-
-<nav class="navbar navbar-dark bg-dark mb-4 shadow-sm">
-    <div class="container-fluid px-4">
-        <span class="navbar-brand mb-0 h1">
-            <i class="bi bi-shield-shaded me-2"></i> BNGRC DASHBOARD
-        </span>
-        <div class="d-flex">
-            <!-- <a href="<?=$base_url?>/villes" class="btn btn-outline-light btn-sm me-2">Villes</a> -->
-            <a href="<?=$base_url?>/dons" class="btn btn-outline-light btn-sm me-2">Gérer les dons</a>
-            <a href="<?=$base_url?>/dons/give" class="btn btn-primary btn-sm">Ajouter un don</a>
+<div class="main-content">
+    <div class="section-header">
+        <h4><i class="bi bi-speedometer2 me-2"></i>Tableau de Bord</h4>
+        <div>
+            <a href="/dons" class="btn btn-outline-secondary">
+                <i class="bi bi-list-ul"></i>
+                Gérer les dons
+            </a>
+            <a href="/dons/give" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i>
+                Ajouter un don
+            </a>
         </div>
     </div>
-</nav>
-
-<div class="container-fluid px-4">
     
     <!-- Statistiques -->
-    <div class="row g-3 mb-4">
-        <div class="col-md-2">
-            <div class="card stat-card shadow-sm p-3">
-                <div class="stat-value"><?= $stats['total_villes'] ?></div>
-                <div class="stat-label">Villes</div>
-            </div>
+    <div class="stats-grid">
+        <div class="card stat-card" style="border-left-color: var(--accent-color);">
+            <div class="stat-value"><?= $stats['total_villes'] ?></div>
+            <div class="stat-label">Villes</div>
         </div>
-        <div class="col-md-2">
-            <div class="card stat-card shadow-sm p-3" style="border-left-color: #6610f2;">
-                <div class="stat-value"><?= number_format($stats['total_besoins']) ?></div>
-                <div class="stat-label">Besoins Totaux</div>
-            </div>
+        <div class="card stat-card" style="border-left-color: var(--warning-color);">
+            <div class="stat-value"><?= number_format($stats['total_besoins']) ?></div>
+            <div class="stat-label">Besoins Totaux</div>
         </div>
-        <div class="col-md-3">
-            <div class="card stat-card shadow-sm p-3" style="border-left-color: #fd7e14;">
-                <div class="stat-value"><?= number_format($stats['total_besoins_restants']) ?></div>
-                <div class="stat-label">Besoins Restants</div>
-            </div>
+        <div class="card stat-card" style="border-left-color: var(--danger-color);">
+            <div class="stat-value"><?= number_format($stats['total_besoins_restants']) ?></div>
+            <div class="stat-label">Besoins Restants</div>
         </div>
-        <div class="col-md-2">
-            <div class="card stat-card shadow-sm p-3" style="border-left-color: #198754;">
-                <div class="stat-value"><?= $stats['total_dons'] ?></div>
-                <div class="stat-label">Dons Reçus</div>
-            </div>
+        <div class="card stat-card" style="border-left-color: var(--success-color);">
+            <div class="stat-value"><?= $stats['total_dons'] ?></div>
+            <div class="stat-label">Dons Reçus</div>
         </div>
-        <div class="col-md-3">
-            <div class="card stat-card shadow-sm p-3" style="border-left-color: #0dcaf0;">
-                <div class="stat-value"><?= $stats['pourcentage_satisfaction'] ?>%</div>
-                <div class="stat-label">Taux de Satisfaction Global</div>
-                <div class="progress mt-2">
-                    <div class="progress-bar bg-info" style="width: <?= $stats['pourcentage_satisfaction'] ?>%"></div>
-                </div>
+        <div class="card stat-card" style="border-left-color: var(--accent-color);">
+            <div class="stat-value"><?= $stats['pourcentage_satisfaction'] ?>%</div>
+            <div class="stat-label">Satisfaction Globale</div>
+            <div class="progress" style="margin-top: 10px;">
+                <div class="progress-bar bg-info" style="width: <?= $stats['pourcentage_satisfaction'] ?>%"></div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Besoins en cours -->
-            <div class="section-container">
-                <h4 class="mb-4 text-secondary"><i class="bi bi-exclamation-triangle me-2"></i>Besoins en cours par localité</h4>
-                
-                <?php if (empty($villes)): ?>
-                    <div class="text-center py-5 text-muted">
-                        <i class="bi bi-patch-check fs-1 text-success"></i>
-                        <p class="mt-2">Tous les besoins actuels sont satisfaits !</p>
-                    </div>
-                <?php else: ?>
-                    <?php foreach ($villes as $ville): ?>
-                        <div class="ville-group mb-5">
-                            <div class="ville-header d-flex justify-content-between align-items-center">
-                                <h5 class="fw-bold text-dark m-0"><?= htmlspecialchars($ville['nom_ville']) ?></h5>
-                                <span class="badge bg-danger rounded-pill"><?= count($ville['besoins']) ?> en attente</span>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+        <!-- Besoins en cours -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-exclamation-triangle me-2"></i>Besoins en cours par localité
+                </div>
+                <div class="card-body">
+                    <?php if (empty($villes)): ?>
+                        <div style="text-align: center; padding: 40px; color: var(--muted-text);">
+                            <i class="bi bi-check-circle" style="font-size: 3rem; color: var(--success-color);"></i>
+                            <p style="margin-top: 15px;">Tous les besoins actuels sont satisfaits !</p>
+                        </div>
+                    <?php else: ?>
+                        <?php foreach ($villes as $ville): ?>
+                            <div class="ville-group">
+                                <div class="ville-header">
+                                    <h5><?= htmlspecialchars($ville['nom_ville']) ?></h5>
+                                    <span class="badge-pill badge-danger"><?= count($ville['besoins']) ?> en attente</span>
+                                </div>
+                                <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Date</th>
+                                            <th style="width: 100px;">Date</th>
                                             <th>Désignation</th>
-                                            <th>Type</th>
-                                            <th class="text-end">Reste</th>
+                                            <th style="width: 120px;">Type</th>
+                                            <th style="width: 100px; text-align: right;">Reste</th>
                                             <th style="width: 180px;">Progression</th>
                                         </tr>
                                     </thead>
@@ -186,16 +161,20 @@ $besoins_attribues = $besoins_attribues ?? [];
                                             $typeBadgeClass = 'badge-' . strtolower($besoin['nom_type_besoin']);
                                         ?>
                                         <tr>
-                                            <td class="small text-muted"><?= date('d/m/Y', strtotime($besoin['date_besoin'])) ?></td>
-                                            <td><span class="fw-semibold"><?= htmlspecialchars($besoin['nom_besoin']) ?></span></td>
+                                            <td style="color: var(--muted-text); font-size: 0.9rem;">
+                                                <?= date('d/m/Y', strtotime($besoin['date_besoin'])) ?>
+                                            </td>
+                                            <td class="fw-semibold"><?= htmlspecialchars($besoin['nom_besoin']) ?></td>
                                             <td><span class="badge <?= $typeBadgeClass ?>"><?= htmlspecialchars($besoin['nom_type_besoin']) ?></span></td>
-                                            <td class="text-end text-danger fw-bold"><?= number_format($besoin['quantite_restante']) ?></td>
+                                            <td style="text-align: right; color: var(--danger-color); font-weight: 600;">
+                                                <?= number_format($besoin['quantite_restante']) ?>
+                                            </td>
                                             <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="progress flex-grow-1 me-2">
+                                                <div style="display: flex; align-items: center; gap: 10px;">
+                                                    <div class="progress" style="flex: 1;">
                                                         <div class="progress-bar bg-warning" style="width: <?= $progression ?>%"></div>
                                                     </div>
-                                                    <small style="font-size: 0.7rem;"><?= $progression ?>%</small>
+                                                    <span style="font-size: 0.85rem; color: var(--muted-text);"><?= $progression ?>%</span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -203,9 +182,9 @@ $besoins_attribues = $besoins_attribues ?? [];
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <!-- Besoins attribués -->
@@ -279,36 +258,66 @@ $besoins_attribues = $besoins_attribues ?? [];
             </div>
         </div>
 
-        <!-- Dernières distributions -->
-        <div class="col-lg-4">
-            <div class="section-container">
-                <h4 class="mb-4 text-secondary"><i class="bi bi-clock-history me-2"></i>Dernières distributions</h4>
-                
-                <?php if (empty($dons)): ?>
-                    <div class="alert alert-light text-center border">Aucune distribution effectuée</div>
-                <?php else: ?>
-                    <div class="list-group list-group-flush">
-                        <?php foreach ($dons as $villeId => $donsList): ?>
-                            <?php foreach ($donsList as $don): ?>
-                                <div class="list-group-item px-0 py-3 border-0 border-bottom">
-                                    <div class="d-flex w-100 justify-content-between align-items-start">
-                                        <h6 class="mb-1 fw-bold text-primary"><?= htmlspecialchars($don['nom_besoin']) ?></h6>
-                                        <small class="text-muted" style="font-size: 0.75rem;"><?= date('d/m/Y', strtotime($don['date_distribution'])) ?></small>
-                                    </div>
-                                    <p class="mb-1 text-muted small">
-                                        Versé à : <strong><?= htmlspecialchars($don['nom_ville']) ?></strong><br>
-                                        Volume : <span class="badge bg-success text-white"><?= number_format($don['quantite_distribuee']) ?> unités</span>
-                                    </p>
-                                    <?php if (!empty($don['nom_donneur'])): ?>
-                                        <div class="mt-1 small text-secondary">
-                                            <i class="bi bi-person-heart me-1"></i><?= htmlspecialchars($don['nom_donneur']) ?>
-                                        </div>
-                                    <?php endif; ?>
+        <!-- Sidebar droit -->
+        <div>
+            <!-- Villes satisfaites -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-check-circle me-2"></i>Villes Satisfaites
+                </div>
+                <div class="card-body">
+                    <?php if (empty($villes_satisfait)): ?>
+                        <p class="text-muted" style="text-align: center;">Aucune ville entièrement satisfaite</p>
+                    <?php else: ?>
+                        <?php foreach ($villes_satisfait as $v_sat): ?>
+                            <div style="display: flex; align-items: center; padding: 12px; background-color: rgba(39, 174, 96, 0.05); border-radius: 6px; margin-bottom: 10px;">
+                                <i class="bi bi-check-circle-fill" style="color: var(--success-color); font-size: 1.5rem; margin-right: 12px;"></i>
+                                <div>
+                                    <div class="fw-bold"><?= htmlspecialchars($v_sat['nom_ville']) ?></div>
+                                    <small class="text-success">Tous besoins comblés</small>
                                 </div>
-                            <?php endforeach; ?>
+                            </div>
                         <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Dernières distributions -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-clock-history me-2"></i>Dernières Distributions
+                </div>
+                <div class="card-body">
+                    <?php if (empty($dons)): ?>
+                        <p class="text-muted" style="text-align: center;">Aucune distribution</p>
+                    <?php else: ?>
+                        <div class="list-group">
+                            <?php foreach ($dons as $villeId => $donsList): ?>
+                                <?php foreach ($donsList as $don): ?>
+                                    <div class="list-group-item">
+                                        <div style="display: flex; justify-content: between; align-items: start;">
+                                            <h6 class="fw-bold" style="color: var(--accent-color); margin-bottom: 5px;">
+                                                <?= htmlspecialchars($don['nom_besoin']) ?>
+                                            </h6>
+                                            <small class="text-muted">
+                                                <?= date('d/m/Y', strtotime($don['date_distribution'])) ?>
+                                            </small>
+                                        </div>
+                                        <p class="text-muted" style="font-size: 0.9rem; margin: 5px 0;">
+                                            <i class="bi bi-geo-alt"></i> <?= htmlspecialchars($don['nom_ville']) ?><br>
+                                            <i class="bi bi-box"></i> <?= number_format($don['quantite_distribuee']) ?> unités
+                                        </p>
+                                        <?php if (!empty($don['nom_donneur'])): ?>
+                                            <small class="text-muted">
+                                                <i class="bi bi-person"></i> <?= htmlspecialchars($don['nom_donneur']) ?>
+                                            </small>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
