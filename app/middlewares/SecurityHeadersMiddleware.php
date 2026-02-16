@@ -38,7 +38,7 @@ class SecurityHeadersMiddleware
 		]);
 
 		$this->app->response()->header('X-Frame-Options', 'SAMEORIGIN');
-		$this->app->response()->header('Content-Security-Policy', $csp);
+		// $this->app->response()->header('Content-Security-Policy', $csp);
 		$this->app->response()->header('X-XSS-Protection', '1; mode=block');
 		$this->app->response()->header('X-Content-Type-Options', 'nosniff');
 		$this->app->response()->header('Referrer-Policy', 'no-referrer-when-downgrade');
