@@ -1,6 +1,6 @@
-CREATE DATABASE bngrc;
+-- CREATE DATABASE bngrc;
 
-USE bngrc;
+-- USE bngrc;
 
 DROP TABLE IF EXISTS distributions;
 DROP TABLE IF EXISTS dons;
@@ -33,7 +33,7 @@ CREATE TABLE besoins_ville (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_besoin DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_besoin DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (ville_id) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -44,7 +44,7 @@ CREATE TABLE dons (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_don DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_don DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
 
@@ -53,7 +53,7 @@ CREATE TABLE distributions (
     id_ville int NOT NULL,
     besoin_id int NOT NULL,
     quantite int NOT NULL,
-    date_distribution DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_distribution DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (id_ville) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
