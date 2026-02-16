@@ -250,7 +250,7 @@ $csp_nonce = $csp_nonce ?? '';
                 <h1><i class="bi bi-graph-up-arrow me-3"></i>Simulation de Distribution</h1>
                 <p class="mb-0 opacity-75">Visualisez l'impact de la distribution avant validation</p>
             </div>
-            <a href="<?= $base_url ?>dons" class="btn btn-light btn-lg">
+            <a href="<?= $base_url ?>/dons" class="btn btn-light btn-lg">
                 <i class="bi bi-arrow-left me-2"></i>Retour aux dons
             </a>
         </div>
@@ -310,7 +310,7 @@ $csp_nonce = $csp_nonce ?? '';
                     </table>
                 </div>
                 <div class="text-center p-4">
-                    <form method="POST" action="<?= $base_url ?>dons/simuler" class="d-inline">
+                    <form method="POST" action="<?= $base_url ?>/dons/simuler" class="d-inline">
                         <button type="submit" class="btn btn-simulate">
                             <i class="bi bi-play-circle me-2"></i>Lancer la simulation
                         </button>

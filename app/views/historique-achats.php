@@ -52,7 +52,7 @@ $csp_nonce = $csp_nonce ?? '';
 <div class="main-content">
     <div class="section-header">
         <h4><i class="bi bi-receipt me-2"></i>Historique des Achats</h4>
-        <a href="<?= $base_url ?>/dashboard" class="btn btn-outline-secondary">
+        <a href="<?= $base_url ?>/" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i>
             Retour au tableau de bord
         </a>
