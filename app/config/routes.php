@@ -13,7 +13,7 @@ use flight\net\Router;
 $router->group('', function(Router $router) use ($app) {
 
     $router->get('/', function() use ($app) {
-        Flight::redirect('/dons');
+        $app->render('welcome');
     });
 
     Flight::route('GET /dons', function () {

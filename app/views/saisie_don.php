@@ -31,7 +31,7 @@
         <input type="datetime-local" name="date_saisie" value="<?= date('Y-m-d\TH:i') ?>">
 
         <button type="submit" style="background: #27ae60; color: white; padding: 10px; border: none; cursor: pointer;">
-            Simuler le Dispatch
+            Ajouter le Don
         </button>
     </form>
 
