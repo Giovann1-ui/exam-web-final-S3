@@ -39,17 +39,17 @@
       - [x] Récupérer les données du modèle.
       - [x] **json_encode** : Renvoyer les données via `Flight::json($data)`.
 
-  - [ ] Recap.php **Structure HTML (Bootstrap)** :
-    - [ ] Créer 3 conteneurs (Cards) :
-      - [ ] Besoins totaux.
-      - [ ] Satisfaits.
-      - [ ] Restants.
-      - [ ] Donner un **ID unique** à chaque zone de texte (ex: `id="total-montant"`, `id="satisfait-montant"`, `id="restant-montant"`).
-      - [ ] Ajouter un bouton "Actualiser".
+  - [x] Recap.php **Structure HTML (Bootstrap)** :
+    - [x] Créer 3 conteneurs (Cards) :
+      - [x] Besoins totaux.
+      - [x] Satisfaits.
+      - [x] Restants.
+      - [x] Donner un **ID unique** à chaque zone de texte (ex: `id="total-montant"`, `id="satisfait-montant"`, `id="restant-montant"`).
+      - [x] Ajouter un bouton "Actualiser".
 
-  - [ ] **Fonction JS `refreshData()`** :
-    - [ ] Déclenchée par le clic sur le bouton "Actualiser".
-    - [ ] Utiliser `fetch('/api/recap')` (Route Flight vers le controller).
-    - [ ] Dans le `.then()`, parser le JSON.
-    - [ ] Mettre à jour le contenu HTML des cartes via `innerHTML` ou `innerText`.
-  - [ ] **Auto-load** : Ajouter l'appel à la fonction au chargement (`window.onload`).
+  - [x] **Fonction JS `refreshData()`** :
+    - [x] Déclenchée par le clic sur le bouton "Actualiser".
+    - [x] Utiliser `fetch('/api/recap')` (Route Flight vers le controller).
+    - [x] Dans le `.then()`, parser le JSON.
+    - [x] Mettre à jour le contenu HTML des cartes via `innerHTML` ou `innerText`.
+  - [x] **Auto-load** : Ajouter l'appel à la fonction au chargement (`window.onload`).

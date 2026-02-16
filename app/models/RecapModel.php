@@ -13,11 +13,6 @@ class RecapModel
         $this->db = $db;
     }
 
-    public function getTotalBesoins()
-    {
-        $stmt = $this->db->query("select SUM(quantite * prix_unitaire) from besoins_ville join besoins on besoins_ville.besoin_id = besoins.id");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public function getSatisfait()
     {
@@ -33,17 +28,29 @@ class RecapModel
         ];
     }
 
+    public function getTotalBesoins(): float
+    {
+        $stmt = $this->db->query(
+            "SELECT SUM(bv.quantite * b.prix_unitaire) AS total
+         FROM besoins_ville bv
+         JOIN besoins b ON bv.besoin_id = b.id"
+        );
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (float) ($row['total'] ?? 0.0);
+    }
+
     public function getRecapData()
     {
-        $total = $this->getTotalBesoins();
+        $total = $this->getTotalBesoins(); // now a float
         $satisfaitData = $this->getSatisfait();
-        $satisfait = $satisfaitData['distributions'] + $satisfaitData['achats'];
+        $satisfait = (float)$satisfaitData['distributions'] + (float)$satisfaitData['achats'];
         $restant = $total - $satisfait;
 
         return [
             'total' => $total,
             'satisfait' => $satisfait,
-            'restant' => $restant
+            'restant' => $restant,
         ];
     }
 }
