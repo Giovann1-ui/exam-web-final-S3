@@ -9,8 +9,8 @@
     - [x] bouton vers une page pour ajouter un don
     
 - [ ] page pour ajouter un don (MANA + GIOVANNI + TSOA)
-    - [ok] formulaire pour ajouter un don
-    - [ ] validation du formulaire
+    - [x] formulaire pour ajouter un don
+    - [x] validation du formulaire
     - [ ] fonction pour ajouter un don à la base de données
     - [ ] fonction qui attribue automatiquement le don à une ville si le besoin correspond
     - [ ] redirection vers la page de gestion des dons après l'ajout

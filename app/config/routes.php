@@ -13,7 +13,7 @@ use flight\net\Router;
 $router->group('', function(Router $router) use ($app) {
 
     $router->get('/', function() use ($app) {
-        Flight::redirect('/dons');
+        $app->render('welcome');
     });
 
     Flight::route('GET /dons', function () {
@@ -25,8 +25,9 @@ $router->group('', function(Router $router) use ($app) {
         Flight::redirect('/dons');
     });
 
-	$router->group('/dons', function() use ($router) {
-		$router->get('/give', [ BesoinController::class, 'all_besoins' ]);
-		$router->get('/type-besoin/@id:[0-9]', [ BesoinController::class, 'besoin' ]);
-	});	
+    $router->group('/dons', function() use ($router) {
+        $router->get('/give', [ BesoinController::class, 'all_besoins' ]);
+        $router->post('/add', [ DonsController::class, 'addDon' ]); // Nouvelle route POST
+        $router->get('/type-besoin/@id:[0-9]', [ BesoinController::class, 'besoin' ]);
+    });	
 }, [ SecurityHeadersMiddleware::class ]);
