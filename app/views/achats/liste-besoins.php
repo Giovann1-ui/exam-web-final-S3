@@ -50,7 +50,7 @@ $argent_disponible = $argent_disponible ?? 0;
 <div class="main-content">
     <div class="section-header">
         <h4><i class="bi bi-cart me-2"></i>Besoins Restants à Acheter</h4>
-        <a href="/dashboard" class="btn btn-outline-secondary">
+        <a href="<?= $base_url ?>/dashboard" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i>
             Retour au Dashboard
         </a>
@@ -111,7 +111,7 @@ $argent_disponible = $argent_disponible ?? 0;
                                     $montant_estime = $besoin['quantite_restante'] * $besoin['prix_unitaire'];
                                     $typeBadgeClass = 'badge-' . strtolower($besoin['nom_type_besoin']);
                                 ?>
-                                    <tr class="besoin-clickable" onclick="window.location.href='/achats/form/<?= $besoin['besoin_ville_id'] ?>'">
+                                    <tr class="besoin-clickable" onclick="window.location.href='<?= $base_url ?>/achats/form/<?= $besoin['besoin_ville_id'] ?>'">
                                         <a href="">
                                             <td style="color: var(--muted-text); font-size: 0.9rem;">
                                             <?= date('d/m/Y', strtotime($besoin['date_besoin'])) ?>

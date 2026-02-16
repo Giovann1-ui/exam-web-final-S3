@@ -14,10 +14,12 @@ class DonsController
         
         // Récupérer le nonce CSP depuis l'application
         $csp_nonce = Flight::get('csp_nonce');
+        $base_url = Flight::get('flight.base_url');
         
         Flight::render('dons/index', [
             'dons' => $dons,
-            'csp_nonce' => $csp_nonce
+            'csp_nonce' => $csp_nonce,
+            'base_url' => $base_url
         ]);
     }
 
@@ -226,12 +228,14 @@ class DonsController
         
         // Récupérer le nonce CSP depuis l'application
         $csp_nonce = Flight::get('csp_nonce');
+        $base_url = Flight::get('flight.base_url');
         
         Flight::render('simulation', [
             'dons' => $dons_non_distribues,
             'success' => Flight::request()->query->success ?? null,
             'error' => Flight::request()->query->error ?? null,
-            'csp_nonce' => $csp_nonce
+            'csp_nonce' => $csp_nonce,
+            'base_url' => $base_url
         ]);
     }
 
@@ -271,12 +275,14 @@ class DonsController
             
             // Récupérer le nonce CSP depuis l'application
             $csp_nonce = Flight::get('csp_nonce');
+            $base_url = Flight::get('flight.base_url');
             
             Flight::render('simulation', [
                 'dons' => $dons_non_distribues,
                 'simulation_results' => $simulation_results,
                 'show_validation' => !empty($simulation_results),
-                'csp_nonce' => $csp_nonce
+                'csp_nonce' => $csp_nonce,
+                'base_url' => $base_url
             ]);
         } catch (\Exception $e) {
             error_log("Erreur lors de la simulation: " . $e->getMessage());

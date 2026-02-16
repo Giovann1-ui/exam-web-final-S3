@@ -4,7 +4,7 @@ $csp_nonce = $csp_nonce ?? '';
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
 
 <title>Récapitulatif - BNGRC</title>
-<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?= $base_url ?>/assets/css/bootstrap.min.css" rel="stylesheet">
 <style nonce="<?= $csp_nonce ?>">
     .stats-card {
         border-radius: 8px;
@@ -103,7 +103,7 @@ $csp_nonce = $csp_nonce ?? '';
     }
 
     function refreshData() {
-        fetch('/recap/json')
+        fetch('<?= $base_url ?>recap/json')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('total-montant').innerText = formatAmount(data.total);

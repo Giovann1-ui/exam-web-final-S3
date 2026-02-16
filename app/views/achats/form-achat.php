@@ -75,7 +75,7 @@ $montant_total = $montant_total ?? 0;
     <div class="form-container">
         <div class="section-header">
             <h4><i class="bi bi-cart-plus me-2"></i>Effectuer un Achat</h4>
-            <a href="/achats/besoins" class="btn btn-outline-secondary">
+            <a href="<?= $base_url ?>/achats/besoins" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left"></i>
                 Retour
             </a>
@@ -150,7 +150,7 @@ $montant_total = $montant_total ?? 0;
         <!-- Formulaire -->
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="/achats/add">
+                <form method="POST" action="<?= $base_url ?>/achats/add">
                     <input type="hidden" name="besoin_ville_id" value="<?= $besoin['besoin_ville_id'] ?>">
 
                     <div class="form-group">
@@ -185,7 +185,7 @@ $montant_total = $montant_total ?? 0;
                             <i class="bi bi-check-circle"></i>
                             Confirmer l'Achat
                         </button>
-                        <a href="/achats/besoins" class="btn btn-outline-secondary" style="text-align: center;">
+                        <a href="<?= $base_url ?>/achats/besoins" class="btn btn-outline-secondary" style="text-align: center;">
                             <i class="bi bi-arrow-left"></i>
                             Annuler
                         </a>

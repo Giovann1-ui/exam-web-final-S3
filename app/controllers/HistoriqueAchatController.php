@@ -11,6 +11,14 @@ class HistoriqueAchatController {
         $villes = $vueHistoriqueAchatModel->getAllVilles();
         $total_montant = $vueHistoriqueAchatModel->calculerTotalMontant($achats);
         $total_quantite = $vueHistoriqueAchatModel->calculerTotalQuantite($achats);
-        Flight::render('historique-achats', ['achats' => $achats, 'villes' => $villes, 'total_montant' => $total_montant, 'total_quantite' => $total_quantite]);
+        $base_url = Flight::get('flight.base_url');
+        
+        Flight::render('historique-achats', [
+            'achats' => $achats,
+            'villes' => $villes,
+            'total_montant' => $total_montant,
+            'total_quantite' => $total_quantite,
+            'base_url' => $base_url
+        ]);
     }
 }

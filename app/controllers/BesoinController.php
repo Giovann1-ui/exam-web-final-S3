@@ -15,10 +15,12 @@ class BesoinController {
         
         // Récupérer le nonce CSP depuis l'application
         $csp_nonce = Flight::get('csp_nonce');
+        $base_url = Flight::get('flight.base_url');
         
         Flight::render('saisie_don', [
             'besoins' => $besoins,
-            'csp_nonce' => $csp_nonce
+            'csp_nonce' => $csp_nonce,
+            'base_url' => $base_url
         ]);
     }
 
@@ -31,11 +33,12 @@ class BesoinController {
         
         // Récupérer le nonce CSP depuis l'application
         $csp_nonce = Flight::get('csp_nonce');
+        $base_url = Flight::get('flight.base_url');
         
         Flight::render('type-besoin', [
             'besoin' => $besoin,
-            'csp_nonce' => $csp_nonce
+            'csp_nonce' => $csp_nonce,
+            'base_url' => $base_url
         ]);
     }
 }
-?>

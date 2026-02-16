@@ -15,6 +15,7 @@ class AchatController
         $besoins = $achatModel->getBesoinsRestantsAcheter();
         $argent_disponible = $achatModel->getArgentDisponible();
         $csp_nonce = Flight::get('csp_nonce');
+        $base_url = Flight::get('flight.base_url');
 
         // Grouper les besoins par ville
         $besoins_groupes = [];
@@ -33,7 +34,8 @@ class AchatController
         Flight::render('achats/liste-besoins', [
             'besoins_groupes' => $besoins_groupes,
             'argent_disponible' => $argent_disponible,
-            'csp_nonce' => $csp_nonce
+            'csp_nonce' => $csp_nonce,
+            'base_url' => $base_url
         ]);
     }
 
@@ -65,6 +67,7 @@ class AchatController
         $montant_total = $montant_base + $montant_frais;
 
         $csp_nonce = Flight::get('csp_nonce');
+        $base_url = Flight::get('flight.base_url');
 
         Flight::render('achats/form-achat', [
             'besoin' => $besoin,
@@ -73,7 +76,8 @@ class AchatController
             'montant_base' => $montant_base,
             'montant_frais' => $montant_frais,
             'montant_total' => $montant_total,
-            'csp_nonce' => $csp_nonce
+            'csp_nonce' => $csp_nonce,
+            'base_url' => $base_url
         ]);
     }
 

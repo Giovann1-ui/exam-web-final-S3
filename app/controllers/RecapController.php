@@ -9,7 +9,10 @@ class RecapController
 {
     public function recap()
     {
-        Flight::render('recap.php');
+        $base_url = Flight::get('flight.base_url');
+        Flight::render('recap.php', [
+            'base_url' => $base_url
+        ]);
     }
 
     public function getRecapJSON()

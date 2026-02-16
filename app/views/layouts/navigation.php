@@ -7,8 +7,8 @@ $csp_nonce = $csp_nonce ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="<?= $base_url ?>/assets/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?= $base_url ?>/assets/css/global.css">
 </head>
 <body>
 
@@ -32,56 +32,56 @@ $csp_nonce = $csp_nonce ?? '';
 <div class="sidebar" id="sidebar">
     <div class="sidebar-section-title">Navigation</div>
     
-    <a href="/" class="menu-item <?= $current_page === '/' ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>" class="menu-item <?= $current_page === '/' ? 'active' : '' ?>">
         <i class="bi bi-house-door"></i>
         <span>Accueil</span>
     </a>
     
-    <a href="/" class="menu-item <?= str_contains($current_page, '/dashboard') ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>" class="menu-item <?= str_contains($current_page, '/dashboard') ? 'active' : '' ?>">
         <i class="bi bi-speedometer2"></i>
         <span>Tableau de Bord</span>
     </a>
     
     <div class="sidebar-section-title">Gestion des Dons</div>
     
-    <a href="/dons" class="menu-item <?= $current_page === '/dons' ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>/dons" class="menu-item <?= $current_page === '/dons' ? 'active' : '' ?>">
         <i class="bi bi-list-ul"></i>
         <span>Liste des Dons</span>
     </a>
     
-    <a href="/dons/give" class="menu-item <?= $current_page === '/dons/give' ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>/dons/give" class="menu-item <?= $current_page === '/dons/give' ? 'active' : '' ?>">
         <i class="bi bi-plus-circle"></i>
         <span>Ajouter un Don</span>
     </a>
-
-    <a href="/dons/simulation" class="menu-item <?= $current_page === '/dons/simulation' ? 'active' : '' ?>">
+    
+    <a href="<?= $base_url ?>/dons/simulation" class="menu-item <?= $current_page === '/dons/simulation' ? 'active' : '' ?>">
         <i class="bi bi-graph-up-arrow"></i>
         <span>Simulation</span>
     </a>
     
-    <a href="/historique-achats" class="menu-item <?= str_contains($current_page, '/historique-achats') ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>/historique-achats" class="menu-item <?= str_contains($current_page, '/historique-achats') ? 'active' : '' ?>">
         <i class="bi bi-receipt"></i>
         <span>Historique des Achats</span>
     </a>
     
-    <a href="/achats/besoins" class="menu-item <?= str_contains($current_page, '/achats') ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>/achats/besoins" class="menu-item <?= str_contains($current_page, '/achats') ? 'active' : '' ?>">
         <i class="bi bi-cart"></i>
         <span>Besoins à Acheter</span>
     </a>
     
     <div class="sidebar-section-title">Données</div>
     
-    <a href="/recap" class="menu-item <?= str_contains($current_page, '/recap') ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>/recap" class="menu-item <?= str_contains($current_page, '/recap') ? 'active' : '' ?>">
         <i class="bi bi-graph-up"></i>
         <span>Récapitulatif</span>
     </a>
     
-    <a href="/villes" class="menu-item <?= str_contains($current_page, '/villes') ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>/villes" class="menu-item <?= str_contains($current_page, '/villes') ? 'active' : '' ?>">
         <i class="bi bi-geo-alt"></i>
         <span>Villes</span>
     </a>
     
-    <a href="/besoins" class="menu-item <?= str_contains($current_page, '/besoins') ? 'active' : '' ?>">
+    <a href="<?= $base_url ?>/besoins" class="menu-item <?= str_contains($current_page, '/besoins') ? 'active' : '' ?>">
         <i class="bi bi-exclamation-triangle"></i>
         <span>Besoins</span>
     </a>

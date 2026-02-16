@@ -89,7 +89,7 @@ $csp_nonce = $csp_nonce ?? '';
                 </p>
             </div>
 
-            <form method="POST" action="/dons/add">
+            <form method="POST" action="<?= $base_url ?>/dons/add">
                 <div class="form-group">
                     <label for="donateur" class="form-label">
                         <i class="bi bi-person me-1"></i>Donateur / Libellé

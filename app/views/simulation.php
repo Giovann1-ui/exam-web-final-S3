@@ -13,10 +13,6 @@ $csp_nonce = $csp_nonce ?? '';
 ?>
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
 
-<title>Simulation de Distribution - BNGRC</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-
 <style nonce="<?= $csp_nonce ?>">
     .simulation-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -254,7 +250,7 @@ $csp_nonce = $csp_nonce ?? '';
                 <h1><i class="bi bi-graph-up-arrow me-3"></i>Simulation de Distribution</h1>
                 <p class="mb-0 opacity-75">Visualisez l'impact de la distribution avant validation</p>
             </div>
-            <a href="/dons" class="btn btn-light btn-lg">
+            <a href="<?= $base_url ?>dons" class="btn btn-light btn-lg">
                 <i class="bi bi-arrow-left me-2"></i>Retour aux dons
             </a>
         </div>
@@ -314,7 +310,7 @@ $csp_nonce = $csp_nonce ?? '';
                     </table>
                 </div>
                 <div class="text-center p-4">
-                    <form method="POST" action="/dons/simuler" class="d-inline">
+                    <form method="POST" action="<?= $base_url ?>dons/simuler" class="d-inline">
                         <button type="submit" class="btn btn-simulate">
                             <i class="bi bi-play-circle me-2"></i>Lancer la simulation
                         </button>
@@ -397,7 +393,7 @@ $csp_nonce = $csp_nonce ?? '';
                 </div>
 
                 <div class="text-center">
-                    <form method="POST" action="/dons/valider" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir valider cette distribution ?\n\nCette action est IRRÉVERSIBLE et modifiera définitivement la base de données.');">
+                    <form method="POST" action="<?= $base_url ?>/dons/valider" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir valider cette distribution ?\n\nCette action est IRRÉVERSIBLE et modifiera définitivement la base de données.');">
                         <button type="submit" class="btn btn-validate">
                             <i class="bi bi-check-circle-fill me-2"></i>Valider la distribution
                         </button>

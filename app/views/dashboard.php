@@ -6,8 +6,8 @@ $csp_nonce = $csp_nonce ?? '';
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
 
 <title>Tableau de Bord - BNGRC</title>
- <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/bootstrap-icons/font/bootstrap-icons.css">
+ <link href="<?= $base_url ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= $base_url ?>/assets/bootstrap-icons/font/bootstrap-icons.css">
 <style nonce="<?= $csp_nonce ?>">
     .section-header {
         display: flex;
@@ -85,11 +85,11 @@ $csp_nonce = $csp_nonce ?? '';
     <div class="section-header">
         <h4><i class="bi bi-speedometer2 me-2"></i>Tableau de Bord</h4>
         <div>
-            <a href="/dons" class="btn btn-outline-secondary">
+            <a href="<?= $base_url ?>/dons" class="btn btn-outline-secondary">
                 <i class="bi bi-list-ul"></i>
                 Gérer les dons
             </a>
-            <a href="/dons/give" class="btn btn-success">
+            <a href="<?= $base_url ?>/dons/give" class="btn btn-success">
                 <i class="bi bi-plus-circle"></i>
                 Ajouter un don
             </a>
