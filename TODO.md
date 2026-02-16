@@ -33,13 +33,13 @@
         - [x] Somme des achats effectués (incluant les frais x%).
   - [x] **Méthode `getRecapData()`** : Retourne un tableau associatif avec `total`, `satisfait`, et `restant` (Total - Satisfait).
 
-  - [ ] Créer la méthode pour la route `/recap` : appelle `Flight::render('recap.php')`.
-    - [ ] **Méthode `getRecapJSON()`** :
-      - [ ] Instancier `RecapModel`.
-      - [ ] Récupérer les données du modèle.
-      - [ ] **json_encode** : Renvoyer les données via `Flight::json($data)`.
+  - [x] Créer la méthode pour la route `/recap` : appelle `Flight::render('recap.php')`.
+    - [x] **Méthode `getRecapJSON()`** :
+      - [x] Instancier `RecapModel`.
+      - [x] Récupérer les données du modèle.
+      - [x] **json_encode** : Renvoyer les données via `Flight::json($data)`.
 
-  - [ ] **Structure HTML (Bootstrap)** :
+  - [ ] Recap.php **Structure HTML (Bootstrap)** :
     - [ ] Créer 3 conteneurs (Cards) :
       - [ ] Besoins totaux.
       - [ ] Satisfaits.

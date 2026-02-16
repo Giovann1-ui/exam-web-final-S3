@@ -15,7 +15,7 @@ class RecapModel
 
     public function getTotalBesoins()
     {
-        $stmt = $this->db->querry("select SUM(quantite * prix_unitaire) from besoins_ville join besoins on besoins_ville.besoin_id = besoins.id");
+        $stmt = $this->db->query("select SUM(quantite * prix_unitaire) from besoins_ville join besoins on besoins_ville.besoin_id = besoins.id");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
