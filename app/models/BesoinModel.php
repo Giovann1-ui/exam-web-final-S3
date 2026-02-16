@@ -14,7 +14,12 @@ class BesoinModel
 
     public function get_all_besoins()
     {
-        $stmt = $this->db->prepare("SELECT * FROM besoins");
+        $stmt = $this->db->prepare("
+            SELECT b.*, tb.nom_type_besoin 
+            FROM besoins b
+            INNER JOIN types_besoin tb ON b.type_besoin_id = tb.id
+            ORDER BY tb.nom_type_besoin, b.nom_besoin
+        ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

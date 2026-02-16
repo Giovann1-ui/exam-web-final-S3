@@ -1,45 +1,52 @@
-<?php
+<?php 
+$csp_nonce = $csp_nonce ?? '';
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste de tous les Dons</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/bootstrap-icons/font/bootstrap-icons.css">
-</head>
-<body>
-<div class="container mt-4">
-    <h1 class="mb-4">Liste des Dons</h1>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
-            <tr>
-                <th>Nom Donneur</th>
-                <th>Type Besoin</th>
-                <th>Nom Besoin</th>
-                <th>Quantité</th>
-                <th>Quantité Restante</th>
-                <th>Date Don</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($dons as $don) { ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($don['nom_donneur']); ?></td>
-                    <td><span class="badge bg-primary"><?php echo htmlspecialchars($don['nom_type_besoin']); ?></span></td>
-                    <td><span class="badge bg-info"><?php echo htmlspecialchars($don['nom_besoin']); ?></span></td>
-                    <td><?php echo number_format($don['quantite']); ?></td>
-                    <td><?php echo number_format($don['quantite_restante']); ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($don['date_don'])); ?></td>
-                </tr>
-            <?php } ?>
-            </tbody>
-        </table>
+<?php include __DIR__ . '/../layouts/navigation.php'; ?>
+
+<title>Liste des Dons - BNGRC</title>
+
+<div class="main-content">
+    <div class="section-header">
+        <h4><i class="bi bi-list-ul me-2"></i>Liste des Dons</h4>
+        <a href="/dons/give" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i>
+            Ajouter un Don
+        </a>
     </div>
-    <a href="/dons/give" class="btn btn-primary">Inserer Dons</a>
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom Donneur</th>
+                        <th>Type Besoin</th>
+                        <th>Nom Besoin</th>
+                        <th style="text-align: right;">Quantité</th>
+                        <th style="text-align: right;">Restante</th>
+                        <th>Date Don</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($dons as $don): ?>
+                        <tr>
+                            <td class="fw-semibold"><?= htmlspecialchars($don['nom_donneur']) ?></td>
+                            <td>
+                                <span class="badge badge-<?= strtolower($don['nom_type_besoin']) ?>">
+                                    <?= htmlspecialchars($don['nom_type_besoin']) ?>
+                                </span>
+                            </td>
+                            <td><?= htmlspecialchars($don['nom_besoin']) ?></td>
+                            <td style="text-align: right;"><?= number_format($don['quantite']) ?></td>
+                            <td style="text-align: right;"><?= number_format($don['quantite_restante']) ?></td>
+                            <td><?= date('d/m/Y H:i', strtotime($don['date_don'])) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

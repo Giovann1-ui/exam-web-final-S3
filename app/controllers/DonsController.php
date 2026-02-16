@@ -11,7 +11,14 @@ class DonsController
     {
         $donsModel = new DonModels(Flight::db());
         $dons = $donsModel->getAllDons();
-        Flight::render('dons/index', ['dons' => $dons]);
+        
+        // Récupérer le nonce CSP depuis l'application
+        $csp_nonce = Flight::get('csp_nonce');
+        
+        Flight::render('dons/index', [
+            'dons' => $dons,
+            'csp_nonce' => $csp_nonce
+        ]);
     }
 
     /**
@@ -21,7 +28,7 @@ class DonsController
     {
         // Récupération des données du formulaire
         $nom_donneur = Flight::request()->data->donateur ?? '';
-        $besoin_id = Flight::request()->data->type ?? '';
+        $besoin_id = Flight::request()->data->besoin_id ?? '';
         $quantite_don = Flight::request()->data->quantite_don ?? 0;
         $date_saisie = Flight::request()->data->date_saisie ?? '';
 
@@ -107,38 +114,40 @@ class DonsController
 
         foreach ($besoins_villes as $besoin_ville) {
             if ($quantite_restante_don <= 0) {
-                break; // Plus de don disponible
+                break;
             }
 
-            $quantite_besoin = $besoin_ville['quantite_restante'];
+            $quantite_besoin_ville = $besoin_ville['quantite_restante'];
             
-            // Calculer la quantité à distribuer
-            $quantite_distribuee = min($quantite_restante_don, $quantite_besoin);
-
-            // Enregistrer la distribution
-            $donsModel->insertDistribution(
-                $besoin_ville['ville_id'],
-                $besoin_id,
-                $quantite_distribuee,
-                $date_distribution
-            );
-
-            // Mettre à jour la quantité restante du besoin de la ville
-            $nouvelle_quantite_besoin = $quantite_besoin - $quantite_distribuee;
-            $donsModel->updateBesoinVilleQuantite(
-                $besoin_ville['id'],
-                $nouvelle_quantite_besoin
-            );
-
-            // Mettre à jour la quantité restante du don
-            $quantite_restante_don -= $quantite_distribuee;
-            
-            $distributions_count++;
+            if ($quantite_besoin_ville > 0) {
+                // Calculer la quantité à distribuer
+                $quantite_a_distribuer = min($quantite_restante_don, $quantite_besoin_ville);
+                
+                // Insérer la distribution
+                $donsModel->insertDistribution(
+                    $besoin_ville['ville_id'],
+                    $besoin_id,
+                    $quantite_a_distribuer,
+                    $date_distribution
+                );
+                
+                // Mettre à jour la quantité restante du besoin de la ville
+                $nouvelle_quantite_restante = $quantite_besoin_ville - $quantite_a_distribuer;
+                $donsModel->updateBesoinVilleQuantite(
+                    $besoin_ville['id'],
+                    $nouvelle_quantite_restante
+                );
+                
+                // Mettre à jour la quantité restante du don
+                $quantite_restante_don -= $quantite_a_distribuer;
+                
+                $distributions_count++;
+            }
         }
-
+        
         // Mettre à jour la quantité restante du don
         $donsModel->updateDonQuantiteRestante($don_id, $quantite_restante_don);
-
+        
         return $distributions_count;
     }
 }
