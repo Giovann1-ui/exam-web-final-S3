@@ -27,7 +27,8 @@ $router->group('', function(Router $router) use ($app) {
 
     $router->group('/dons', function() use ($router) {
         $router->get('/give', [ BesoinController::class, 'all_besoins' ]);
-        $router->post('/add', [ DonsController::class, 'addDon' ]); // Nouvelle route POST
+        $router->post('/add', [ DonsController::class, 'store' ]); // Utiliser store au lieu de addDon
+        $router->get('/besoin/@id:[0-9]', [ BesoinController::class, 'besoin' ]);
         $router->get('/type-besoin/@id:[0-9]', [ BesoinController::class, 'besoin' ]);
     });
 
@@ -35,3 +36,8 @@ $router->group('', function(Router $router) use ($app) {
     Flight::route('/recap/json', [new RecapController(), 'getRecapJSON']);
 
 }, [ SecurityHeadersMiddleware::class ]);
+
+// Routes pour la simulation
+Flight::route('GET /dons/simulation', [DonsController::class, 'simulation']);
+Flight::route('POST /dons/simuler', [DonsController::class, 'simuler']);
+Flight::route('POST /dons/valider', [DonsController::class, 'valider']);

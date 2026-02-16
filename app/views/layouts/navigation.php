@@ -53,6 +53,11 @@ $csp_nonce = $csp_nonce ?? '';
         <i class="bi bi-plus-circle"></i>
         <span>Ajouter un Don</span>
     </a>
+
+    <a href="/dons/simulation" class="menu-item <?= $current_page === '/dons/simulation' ? 'active' : '' ?>">
+        <i class="bi bi-graph-up-arrow"></i>
+        <span>Simulation</span>
+    </a>
     
     <div class="sidebar-section-title">Données</div>
     

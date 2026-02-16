@@ -1,4 +1,4 @@
-<?php 
+<?php
 $csp_nonce = $csp_nonce ?? '';
 ?>
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
@@ -33,8 +33,8 @@ $csp_nonce = $csp_nonce ?? '';
     }
     
     .alert-rule {
-        background-color: #fff3cd;
-        border-left: 4px solid var(--warning-color);
+        background-color: #d1ecf1;
+        border-left: 4px solid #0dcaf0;
         padding: 15px;
         border-radius: 6px;
         margin-bottom: 25px;
@@ -81,10 +81,11 @@ $csp_nonce = $csp_nonce ?? '';
             <?php endif; ?>
 
             <div class="alert-rule">
-                <strong><i class="bi bi-info-circle me-2"></i>Règle de gestion :</strong>
+                <strong><i class="bi bi-info-circle me-2"></i>Nouveau système de distribution :</strong>
                 <p style="margin: 10px 0 0 0;">
-                    Le dispatch se fera automatiquement par ordre de date et de saisie 
-                    vers les villes ayant des besoins correspondants.
+                    Votre don sera enregistré et mis en attente. Vous pourrez ensuite 
+                    <strong>simuler la distribution</strong> pour voir comment il sera réparti 
+                    entre les villes avant de <strong>valider définitivement</strong> le dispatch.
                 </p>
             </div>
 
@@ -148,9 +149,9 @@ $csp_nonce = $csp_nonce ?? '';
                 </div>
 
                 <div style="display: grid; gap: 15px; margin-top: 30px;">
-                    <button type="submit" class="btn btn-success btn-submit">
-                        <i class="bi bi-check-circle"></i>
-                        Enregistrer et Simuler le Dispatch
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <i class="bi bi-save"></i>
+                        Enregistrer le Don
                     </button>
                     <a href="/dons" class="btn btn-outline-secondary" style="text-align: center;">
                         <i class="bi bi-arrow-left"></i>
