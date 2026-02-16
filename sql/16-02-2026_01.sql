@@ -65,3 +65,43 @@ INSERT INTO villes (id, nom_ville) VALUES
 
 INSERT INTO types_besoin (nom_type_besoin) VALUES
 ("Nature"), ("Matériaux"), ("Argent");
+
+INSERT INTO besoins (nom_besoin, prix_unitaire, type_besoin_id) VALUES
+('Riz', 2.50, 1),
+('Tôle', 15.00, 2),
+('Argent', 1.00, 3);
+
+INSERT INTO besoins_ville (ville_id, besoin_id, quantite, quantite_restante) VALUES
+(1, 1, 100, 100),
+(1, 2, 50, 50),
+(1, 3, 200, 200),
+(2, 1, 150, 150),
+(2, 2, 75, 75),
+(2, 3, 300, 300),
+(3, 1, 200, 200),
+(3, 2, 100, 100),
+(3, 3, 400, 400);
+
+
+SELECT v.id AS ville_id, v.nom_ville, b.id AS besoin_id, b.nom_besoin, bv.quantite_restante
+        FROM villes v
+        JOIN besoins_ville bv ON v.id = bv.ville_id
+        JOIN besoins b ON b.id = bv.besoin_id
+ ;
+
+SELECT 
+                    v.id AS ville_id, 
+                    v.nom_ville,
+                    b.id AS besoin_id,
+                    b.nom_besoin,
+                    b.prix_unitaire,
+                    tb.nom_type_besoin,
+                    bv.quantite,
+                    bv.quantite_restante,
+                    bv.date_besoin
+                FROM villes v
+                JOIN besoins_ville bv ON v.id = bv.ville_id
+                JOIN besoins b ON b.id = bv.besoin_id
+                JOIN types_besoin tb ON b.type_besoin_id = tb.id
+                WHERE bv.quantite_restante = 0
+                ORDER BY v.nom_ville, b.nom_besoin
