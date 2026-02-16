@@ -56,6 +56,11 @@ $csp_nonce = $csp_nonce ?? '';
     
     <div class="sidebar-section-title">Données</div>
     
+    <a href="/recap" class="menu-item <?= str_contains($current_page, '/recap') ? 'active' : '' ?>">
+        <i class="bi bi-graph-up"></i>
+        <span>Récapitulatif</span>
+    </a>
+    
     <a href="/villes" class="menu-item <?= str_contains($current_page, '/villes') ? 'active' : '' ?>">
         <i class="bi bi-geo-alt"></i>
         <span>Villes</span>
