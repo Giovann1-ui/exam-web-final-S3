@@ -37,7 +37,7 @@ $csp_nonce = $csp_nonce ?? '';
         <span>Accueil</span>
     </a>
     
-    <a href="/dashboard" class="menu-item <?= str_contains($current_page, '/dashboard') ? 'active' : '' ?>">
+    <a href="/" class="menu-item <?= str_contains($current_page, '/dashboard') ? 'active' : '' ?>">
         <i class="bi bi-speedometer2"></i>
         <span>Tableau de Bord</span>
     </a>
@@ -52,6 +52,11 @@ $csp_nonce = $csp_nonce ?? '';
     <a href="/dons/give" class="menu-item <?= $current_page === '/dons/give' ? 'active' : '' ?>">
         <i class="bi bi-plus-circle"></i>
         <span>Ajouter un Don</span>
+    </a>
+
+    <a href="/dons/simulation" class="menu-item <?= $current_page === '/dons/simulation' ? 'active' : '' ?>">
+        <i class="bi bi-graph-up-arrow"></i>
+        <span>Simulation</span>
     </a>
     
     <div class="sidebar-section-title">Données</div>

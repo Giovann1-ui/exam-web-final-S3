@@ -8,10 +8,17 @@ $csp_nonce = $csp_nonce ?? '';
 <div class="main-content">
     <div class="section-header">
         <h4><i class="bi bi-list-ul me-2"></i>Liste des Dons</h4>
-        <a href="/dons/give" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i>
-            Ajouter un Don
-        </a>
+        <div class="col-auto">
+            <a href="/dons/give" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nouveau don
+            </a>
+            <a href="/dons/simulation" class="btn btn-info">
+                <i class="bi bi-graph-up-arrow"></i> Simulation
+            </a>
+            <a href="/" class="btn btn-info">
+                <i class="bi bi-house-door"></i> Accueil
+            </a>
+        </div>
     </div>
 
     <div class="card">
