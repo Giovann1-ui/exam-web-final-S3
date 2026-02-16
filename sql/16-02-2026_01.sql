@@ -10,17 +10,17 @@ DROP TABLE IF EXISTS besoins_ville;
 DROP TABLE IF EXISTS villes;
 
 CREATE TABLE villes (
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id int AUTO_INCREMENT PRIMARY KEY,
     nom_ville VARCHAR(500) NOT NULL
 );
 
 CREATE TABLE types_besoin (
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id int AUTO_INCREMENT PRIMARY KEY,
     nom_type_besoin VARCHAR(500) NOT NULL -- Ex: 'Riz', 'Tôle', 'Argent' [cite: 10, 11, 12]
 );
 
 CREATE TABLE besoins (
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id int AUTO_INCREMENT PRIMARY KEY,
     nom_besoin VARCHAR(500) NOT NULL,
     prix_unitaire DECIMAL(10, 2) NOT NULL,
     type_besoin_id int NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE besoins (
 );
 
 CREATE TABLE besoins_ville (
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id int AUTO_INCREMENT PRIMARY KEY,
     ville_id int NOT NULL,
     besoin_id int NOT NULL,
     quantite int NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE besoins_ville (
 );
 
 CREATE TABLE dons (
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id int AUTO_INCREMENT PRIMARY KEY,
     nom_donneur VARCHAR(500) NOT NULL,
     besoin_id int NOT NULL,
     quantite int NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE dons (
 );
 
 CREATE TABLE distributions (
-    id int PRIMARY KEY AUTO_INCREMENT,
+    id int AUTO_INCREMENT PRIMARY KEY,
     id_ville int NOT NULL,
     besoin_id int NOT NULL,
     quantite int NOT NULL,

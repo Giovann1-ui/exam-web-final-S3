@@ -1,29 +1,32 @@
 <?php
 
-use app\controllers\ApiExampleController;
 use app\controllers\DashboardController;
+use app\controllers\BesoinController;
+use app\controllers\DonsController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
 
-/** 
- * @var Router $router 
+/**
+ * @var Router $router
  * @var Engine $app
  */
-
-// This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function(Router $router) use ($app) {
 
 	$router->get('/', [DashboardController::class, 'index']);
-	
-	$router->get('/hello-world/@name', function($name) {
-		echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
-	});
 
-	$router->group('/api', function() use ($router) {
-		$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
-		$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
-		$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
-	});
-	
+    Flight::route('GET /dons', function () {
+        $controller = new DonsController();
+        $controller->getAllDons();
+    });
+
+    Flight::route('GET /dons/', function () {
+        Flight::redirect('/dons');
+    });
+
+    $router->group('/dons', function() use ($router) {
+        $router->get('/give', [ BesoinController::class, 'all_besoins' ]);
+        $router->post('/add', [ DonsController::class, 'addDon' ]); // Nouvelle route POST
+        $router->get('/type-besoin/@id:[0-9]', [ BesoinController::class, 'besoin' ]);
+    });	
 }, [ SecurityHeadersMiddleware::class ]);
