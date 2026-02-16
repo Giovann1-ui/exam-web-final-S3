@@ -1,6 +1,6 @@
 <?php
 
-use app\controllers\TypeBesoinController;
+use app\controllers\BesoinController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -22,7 +22,7 @@ $router->group('', function(Router $router) use ($app) {
 	});
 
 	$router->group('/dons', function() use ($router) {
-		$router->get('/give', [ TypeBesoinController::class, 'all_type_besoins' ]);
-		$router->get('/type-besoin/@id:[0-9]', [ TypeBesoinController::class, 'besoin' ]);
+		$router->get('/give', [ BesoinController::class, 'all_besoins' ]);
+		$router->get('/type-besoin/@id:[0-9]', [ BesoinController::class, 'besoin' ]);
 	});	
 }, [ SecurityHeadersMiddleware::class ]);

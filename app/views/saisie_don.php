@@ -17,10 +17,10 @@
         <label>Donateur / Libellé :</label>
         <input type="text" name="donateur" placeholder="Ex: Association X">
 
-        <label>Type de don :</label>
+        <label>Don :</label>
         <select name="type">
-            <?php foreach ($type_besoins as $type_besoin): ?>
-                <option value="<?= $type_besoin['id'] ?>"><?= $type_besoin['nom_type_besoin'] ?></option>
+            <?php foreach ($besoins as $besoin): ?>
+                <option value="<?= $besoin['id'] ?>"><?= $besoin['nom_besoin'] ?></option>
             <?php endforeach; ?>
         </select>
 
