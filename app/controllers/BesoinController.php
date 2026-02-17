@@ -7,6 +7,21 @@ use Flight;
 
 class BesoinController
 {
+
+    public function all_besoins()
+    {
+        $besoinModel = new BesoinModel(Flight::db());
+        $besoins = $besoinModel->get_all_besoins();
+
+        // Récupérer le nonce CSP depuis l'application
+        $csp_nonce = Flight::get('csp_nonce');
+
+        Flight::render('saisie_don', [
+            'besoins' => $besoins,
+            'csp_nonce' => $csp_nonce
+        ]);
+    }
+
     public function showInsertionForm()
     {
         $model = new BesoinModel(Flight::db());
@@ -42,7 +57,7 @@ class BesoinController
 
         try {
             $model = new BesoinModel(Flight::db());
-            $model->insertBesoinVille($ville_id, $besoin_id, (int)$quantite, $date_besoin);
+            $model->insertBesoinVille($ville_id, $besoin_id, (int) $quantite, $date_besoin);
 
             Flight::render('insertionBesoins', [
                 'success' => 'Besoin ajouté avec succès',
