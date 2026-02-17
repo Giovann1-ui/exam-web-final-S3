@@ -68,9 +68,9 @@ return [
 	'database' => [
 		// MySQL Example:
 		'host'     => 'localhost:3306',      // Database host (e.g., 'localhost', 'db.example.com')
-		'dbname'   => 'bngrc',   // Database name (e.g., 'flightphp')
-		'user'     => 'root',  // Database user (e.g., 'root')
-		'password' => '',  // Database password (never commit real passwords)
+		'dbname'   => 'db_s2_ETU004055',   // Database name (e.g., 'flightphp')
+		'user'     => 'ETU004055',  // Database user (e.g., 'root')
+		'password' => 'NdNvKoNF',  // Database password (never commit real passwords)
 
 		// SQLite Example:
 		// 'file_path' => __DIR__ . $ds . '..' . $ds . 'database.sqlite', // Path to SQLite file

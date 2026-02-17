@@ -1,8 +1,10 @@
-DROP DATABASE bngrc;
+-- DROP DATABASE bngrc;
 
-CREATE DATABASE bngrc;
+-- CREATE DATABASE bngrc;
 
-USE bngrc;
+-- USE bngrc;
+
+SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS distributions;
 DROP TABLE IF EXISTS dons;
@@ -10,8 +12,9 @@ DROP TABLE IF EXISTS besoins;
 DROP TABLE IF EXISTS types_besoin;
 DROP TABLE IF EXISTS besoins_ville;
 DROP TABLE IF EXISTS villes;
-
 DROP TABLE IF EXISTS frais_achat_besoin;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE villes (
     id int AUTO_INCREMENT PRIMARY KEY,
@@ -37,7 +40,7 @@ CREATE TABLE besoins_ville (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_besoin DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_besoin DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (ville_id) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -48,7 +51,7 @@ CREATE TABLE dons (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_don DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_don DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
 
@@ -57,7 +60,7 @@ CREATE TABLE distributions (
     id_ville int NOT NULL,
     besoin_id int NOT NULL,
     quantite int NOT NULL,
-    date_distribution DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_distribution DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (id_ville) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -73,7 +76,7 @@ CREATE TABLE achats_besoins (
     id int AUTO_INCREMENT PRIMARY KEY,
     besoin_ville_id int NOT NULL,
     quantite int NOT NULL,
-    date_achat DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_achat DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (besoin_ville_id) REFERENCES besoins_ville(id)
 );
 
@@ -85,7 +88,7 @@ CREATE TABLE achats (
                         prix_unitaire_ht DECIMAL(10, 2), -- Prix du produit au moment de l'achat
                         frais_pourcentage DECIMAL(5, 2), -- Le x% de frais configuré
                         montant_total_ttc DECIMAL(15, 2), -- (Qté * Prix) * (1 + x/100)
-                        date_achat TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        date_achat TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
                         FOREIGN KEY (ville_id) REFERENCES villes(id),
                         FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -125,8 +128,8 @@ INSERT INTO achats_besoins (besoin_ville_id, quantite) VALUES
 (2, 30), -- Achat de 30 unités de tôle pour Ville B
 (3, 100); -- Achat de 100 unités d'argent pour Ville C
 
-INSERT INTO dons (nom_donneur, besoin_id, quantite, quantite_restante) VALUES
-('Donateur 1', 1, 50, 50);
+-- INSERT INTO dons (nom_donneur, besoin_id, quantite, quantite_restante) VALUES
+-- ('Donateur 1', 1, 50, 50);
 
 CREATE OR REPLACE VIEW v_historique_achats_besoins AS
 (SELECT a.date_achat, v.nom_ville, b.nom_besoin, tb.nom_type_besoin, a.quantite, b.prix_unitaire, f.frais,
