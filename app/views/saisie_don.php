@@ -89,7 +89,7 @@ $csp_nonce = $csp_nonce ?? '';
                 </p>
             </div>
 
-            <form method="POST" action="/dons/add">
+            <form method="POST" action="<?= base_url('/dons/add') ?>">
                 <div class="form-group">
                     <label for="donateur" class="form-label">
                         <i class="bi bi-person me-1"></i>Donateur / Libellé
@@ -153,7 +153,7 @@ $csp_nonce = $csp_nonce ?? '';
                         <i class="bi bi-save"></i>
                         Enregistrer le Don
                     </button>
-                    <a href="/dons" class="btn btn-outline-secondary" style="text-align: center;">
+                    <a href="<?= base_url('/dons') ?>" class="btn btn-outline-secondary" style="text-align: center;">
                         <i class="bi bi-arrow-left"></i>
                         Retour à la liste
                     </a>

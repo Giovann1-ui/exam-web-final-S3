@@ -9,13 +9,13 @@ $csp_nonce = $csp_nonce ?? '';
     <div class="section-header">
         <h4><i class="bi bi-list-ul me-2"></i>Liste des Dons</h4>
         <div class="col-auto">
-            <a href="/dons/give" class="btn btn-primary">
+            <a href="<?= base_url('/dons/give') ?>" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> Nouveau don
             </a>
-            <a href="/dons/simulation" class="btn btn-info">
+            <a href="<?= base_url('/dons/simulation') ?>" class="btn btn-info">
                 <i class="bi bi-graph-up-arrow"></i> Simulation
             </a>
-            <a href="/" class="btn btn-info">
+            <a href="<?= base_url('/') ?>" class="btn btn-info">
                 <i class="bi bi-house-door"></i> Accueil
             </a>
         </div>

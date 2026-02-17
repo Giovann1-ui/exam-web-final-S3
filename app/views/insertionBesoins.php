@@ -165,7 +165,7 @@ $csp_nonce = $csp_nonce ?? '';
                     </div>
                 <?php endif; ?>
 
-                <form method="POST" action="/besoins/add">
+                <form method="POST" action="<?= base_url('/besoins/add') ?>">
                     <div class="form-group">
                         <label for="ville_id" class="form-label">
                             <i class="bi bi-geo-alt"></i>
@@ -222,7 +222,7 @@ $csp_nonce = $csp_nonce ?? '';
                     </div>
 
                     <div class="form-actions">
-                        <a href="/dashboard" class="btn btn-secondary">
+                        <a href="<?= base_url('/dashboard') ?>" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i>
                             Retour
                         </a>

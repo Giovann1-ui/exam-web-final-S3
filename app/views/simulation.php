@@ -12,11 +12,10 @@
     </style>
 </head>
 <body>
-    <?php 
+<?php 
 $csp_nonce = $csp_nonce ?? '';
 ?>
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
-
 <style nonce="<?= $csp_nonce ?>">
     .simulation-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -217,7 +216,7 @@ $csp_nonce = $csp_nonce ?? '';
                 <h1><i class="bi bi-graph-up-arrow me-3"></i>Simulation de Distribution</h1>
                 <p class="mb-0 opacity-75">Visualisez l'impact de la distribution avant validation</p>
             </div>
-            <a href="/dons" class="btn btn-light btn-lg">
+            <a href="<?= base_url('/dons') ?>" class="btn btn-light btn-lg">
                 <i class="bi bi-arrow-left me-2"></i>Retour aux dons
             </a>
         </div>
@@ -278,7 +277,7 @@ $csp_nonce = $csp_nonce ?? '';
                 
                 <!-- Formulaire de sélection du type de distribution -->
                 <div class="p-4 border-top">
-                    <form method="POST" action="/dons/simuler">
+                    <form method="POST" action="<?= base_url('/dons/simuler') ?>">
                         <div class="row align-items-end">
                             <div class="col-md-8">
                                 <label for="type_distribution_id" class="form-label fw-semibold">
@@ -383,7 +382,7 @@ $csp_nonce = $csp_nonce ?? '';
                 </div>
 
                 <div class="text-center">
-                    <form method="POST" action="/dons/valider" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr ?');">
+                    <form method="POST" action="<?= base_url('/dons/valider') ?>" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr ?');">
                         <input type="hidden" name="type_distribution_id" value="<?= $type_distribution_selectionne ?? 1 ?>">
                         <button type="submit" class="btn btn-validate">
                             <i class="bi bi-check-circle-fill me-2"></i>Valider la distribution

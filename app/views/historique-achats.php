@@ -52,7 +52,7 @@ $csp_nonce = $csp_nonce ?? '';
 <div class="main-content">
     <div class="section-header">
         <h4><i class="bi bi-receipt me-2"></i>Historique des Achats</h4>
-        <a href="/dashboard" class="btn btn-outline-secondary">
+        <a href="<?= base_url('/dashboard') ?>" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i>
             Retour au tableau de bord
         </a>
@@ -61,7 +61,7 @@ $csp_nonce = $csp_nonce ?? '';
     <!-- Filtres -->
     <div class="filter-section">
         <h6 class="mb-3"><i class="bi bi-funnel me-2"></i>Filtres</h6>
-        <form method="GET" action="/historique-achats" class="filter-form">
+        <form method="GET" action="<?= base_url('/historique-achats') ?>" class="filter-form">
             <div>
                 <label for="ville_filter" class="form-label">Ville</label>
                 <select name="ville_id" id="ville_filter" class="form-select">
@@ -91,7 +91,7 @@ $csp_nonce = $csp_nonce ?? '';
                     <i class="bi bi-search"></i>
                     Filtrer
                 </button>
-                <a href="/historique-achats" class="btn btn-outline-secondary">
+                <a href="<?= base_url('/historique-achats') ?>" class="btn btn-outline-secondary">
                     <i class="bi bi-x-circle"></i>
                     Réinitialiser
                 </a>

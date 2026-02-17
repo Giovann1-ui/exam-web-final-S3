@@ -84,11 +84,11 @@ $csp_nonce = $csp_nonce ?? '';
     <div class="section-header">
         <h4><i class="bi bi-speedometer2 me-2"></i>Tableau de Bord</h4>
         <div>
-            <a href="/dons" class="btn btn-outline-secondary">
+            <a href="<?= base_url('/dons') ?>" class="btn btn-outline-secondary">
                 <i class="bi bi-list-ul"></i>
                 Gérer les dons
             </a>
-            <a href="/dons/give" class="btn btn-success">
+            <a href="<?= base_url('/dons/give') ?>" class="btn btn-success">
                 <i class="bi bi-plus-circle"></i>
                 Ajouter un don
             </a>

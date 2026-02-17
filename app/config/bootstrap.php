@@ -23,6 +23,9 @@ $app = Flight::app();
  */
 $config = require('config.php');
 
+// Load helper functions
+require('helpers.php');
+
 /*
  * Load the services file.
  * A "service" is basically something special that you want to use in your app.
