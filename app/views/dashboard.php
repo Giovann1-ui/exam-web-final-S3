@@ -102,11 +102,11 @@ $csp_nonce = $csp_nonce ?? '';
             <div class="stat-label">Villes</div>
         </div>
         <div class="card stat-card" style="border-left-color: var(--warning-color);">
-            <div class="stat-value"><?= number_format($stats['total_besoins']) ?></div>
+            <div class="stat-value"><?= number_format($stats['total_besoins'] ?? 0) ?></div>
             <div class="stat-label">Besoins Totaux</div>
         </div>
         <div class="card stat-card" style="border-left-color: var(--danger-color);">
-            <div class="stat-value"><?= number_format($stats['total_besoins_restants']) ?></div>
+            <div class="stat-value"><?= number_format($stats['total_besoins_restants'] ?? 0) ?></div>
             <div class="stat-label">Besoins Restants</div>
         </div>
         <div class="card stat-card" style="border-left-color: var(--success-color);">

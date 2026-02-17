@@ -1,8 +1,8 @@
-DROP DATABASE bngrc;
+-- DROP DATABASE bngrc;
 
-CREATE DATABASE bngrc;
+-- CREATE DATABASE bngrc;
 
-USE bngrc;
+-- USE bngrc;
 
 DROP TABLE IF EXISTS distributions;
 DROP TABLE IF EXISTS dons;
@@ -10,8 +10,10 @@ DROP TABLE IF EXISTS besoins;
 DROP TABLE IF EXISTS types_besoin;
 DROP TABLE IF EXISTS besoins_ville;
 DROP TABLE IF EXISTS villes;
-
 DROP TABLE IF EXISTS frais_achat_besoin;
+DROP TABLE IF EXISTS achats_besoins;
+DROP TABLE IF EXISTS achats;
+DROP TABLE IF EXISTS type_distribution;
 
 CREATE TABLE villes (
     id int AUTO_INCREMENT PRIMARY KEY,
@@ -136,13 +138,13 @@ INSERT INTO frais_achat_besoin (besoin_id, frais) VALUES
 (2, 20), -- Frais pour la tôle
 (3, 0); -- Frais pour l'argent
 
-INSERT INTO achats_besoins (besoin_ville_id, quantite) VALUES
-(1, 50), -- Achat de 50 unités de riz pour Ville A
-(2, 30), -- Achat de 30 unités de tôle pour Ville B
-(3, 100); -- Achat de 100 unités d'argent pour Ville C
 
 -- INSERT INTO dons (nom_donneur, besoin_id, quantite, quantite_restante) VALUES
 -- ('Donateur 1', 1, 50, 50);
 
 INSERT INTO type_distribution (nom_type_distribution) VALUES
 ('Par date de demande'), ('Par demande minimum'), ('Distribution proportionnelle');
+INSERT INTO achats_besoins (besoin_ville_id, quantite) VALUES
+(1, 50),
+(2, 30),
+(3, 100);
