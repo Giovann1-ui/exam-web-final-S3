@@ -11,7 +11,7 @@ class ResetController
         try {
             $db = Flight::db();
             
-            $sqlFile = __DIR__ . '/../../sql/16-02-2026_06.sql';
+            $sqlFile = __DIR__ . '/../../sql/16-02-2026_01-donnee_test.sql';
             
             if (!file_exists($sqlFile)) {
                 Flight::redirect('/?error=sql_file_not_found');

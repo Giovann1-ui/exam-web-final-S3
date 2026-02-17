@@ -48,7 +48,9 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/achats/form/@id:[0-9]', [AchatController::class, 'showFormAchat']);
     $router->post('/achats/add', [AchatController::class, 'addAchat']);
 
-    // Flight::route('GET /reset', [new \app\controllers\ResetController(), 'showResetPage']);
+    Flight::route('GET /besoins/insert', [BesoinController::class, 'showInsertionForm']);
+    Flight::route('POST /besoins/add', [BesoinController::class, 'addBesoin']);
+
     Flight::route('POST /reset', [new ResetController(), 'resetDatabase']);
 
 
