@@ -82,9 +82,9 @@ $csp_nonce = $csp_nonce ?? '';
         <span>Villes</span>
     </a>
     
-    <a href="/besoins" class="menu-item <?= str_contains($current_page, '/besoins') ? 'active' : '' ?>">
-        <i class="bi bi-exclamation-triangle"></i>
-        <span>Besoins</span>
+    <a href="/reset" class="menu-item text-danger" id="reset-database-btn">
+        <i class="bi bi-arrow-clockwise"></i>
+        <span>Réinitialiser la Base</span>
     </a>
 </div>
 
