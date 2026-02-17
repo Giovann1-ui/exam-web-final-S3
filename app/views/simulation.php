@@ -275,11 +275,37 @@ $csp_nonce = $csp_nonce ?? '';
                         </tbody>
                     </table>
                 </div>
-                <div class="text-center p-4">
-                    <form method="POST" action="/dons/simuler" class="d-inline">
-                        <button type="submit" class="btn btn-simulate">
-                            <i class="bi bi-play-circle me-2"></i>Lancer la simulation
-                        </button>
+                
+                <!-- Formulaire de sélection du type de distribution -->
+                <div class="p-4 border-top">
+                    <form method="POST" action="/dons/simuler">
+                        <div class="row align-items-end">
+                            <div class="col-md-8">
+                                <label for="type_distribution_id" class="form-label fw-semibold">
+                                    <i class="bi bi-diagram-3 me-2"></i>Type de Distribution
+                                </label>
+                                <select name="type_distribution_id" id="type_distribution_id" class="form-select" required>
+                                    <?php if (!empty($types_distribution)): ?>
+                                        <?php foreach ($types_distribution as $type): ?>
+                                            <option value="<?= $type['id'] ?>" 
+                                                <?= (isset($type_distribution_selectionne) && $type_distribution_selectionne == $type['id']) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($type['nom_type_distribution']) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+                                <small class="text-muted mt-1 d-block">
+                                    <strong>Par date de demande :</strong> Priorité aux besoins les plus anciens<br>
+                                    <strong>Par demande minimum :</strong> Priorité aux plus petites quantités<br>
+                                    <strong>Distribution proportionnelle :</strong> Répartition équitable selon les besoins
+                                </small>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button type="submit" class="btn btn-simulate w-100">
+                                    <i class="bi bi-play-circle me-2"></i>Lancer la simulation
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             <?php endif; ?>
@@ -358,6 +384,7 @@ $csp_nonce = $csp_nonce ?? '';
 
                 <div class="text-center">
                     <form method="POST" action="/dons/valider" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr ?');">
+                        <input type="hidden" name="type_distribution_id" value="<?= $type_distribution_selectionne ?? 1 ?>">
                         <button type="submit" class="btn btn-validate">
                             <i class="bi bi-check-circle-fill me-2"></i>Valider la distribution
                         </button>

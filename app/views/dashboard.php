@@ -6,8 +6,7 @@ $csp_nonce = $csp_nonce ?? '';
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
 
 <title>Tableau de Bord - BNGRC</title>
-<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/bootstrap-icons/font/bootstrap-icons.css">
+
 <style nonce="<?= $csp_nonce ?>">
     .section-header {
         display: flex;

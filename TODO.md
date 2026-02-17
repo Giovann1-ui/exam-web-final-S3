@@ -89,14 +89,15 @@
     - [x] validation du formulaire
     - [x] fonction pour ajouter un besoin à la base de données
 
-- [ ] modifier page simulation (MANA + GIOVANNI)
-    - formulaire de distribution
-        - [ ] selection de type de distribution
-        - [ ] trois type de distribution
-            - [ ] par date de demande en premier (existe deja)
-            - [ ] par demande minimum
-            - [ ] proportionnelle
-        - [ ] fonctions par demande minimum (MANA)
-        - [ ] fonctions pour la distribution proportionnelle (GIOVANNI)
+- [x] modifier page simulation (MANA + GIOVANNI)
+    - [x] formulaire de distribution
+        - [x] selection de type de distribution
+        - [x] trois type de distribution
+            - [x] par date de demande en premier (existe deja)
+            - [x] par demande minimum
+            - [x] proportionnelle
+        - [x] foxnctions par demande minimum (MANA)
+        - [x] fonctions pour la distribution proportionnelle (GIOVANNI)
             - ex : si une ville A a besoin de 1 kg de riz et une ville B a besoin de 2 kg de riz et une ville C a besoin de 5 kg de riz et qu'on a 6 kg, alors on donne 1/6 a la ville A, 2/6 a la ville B et 5/6 a la ville C
-    - [ ] quand on clique sur simuler, on prend aussi l'id du type de distribution
+            - [x] fonction getBesoinsVilleByBesoinId
+    - [x] quand on clique sur simuler, on prend aussi l'id du type de distribution

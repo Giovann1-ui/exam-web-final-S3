@@ -23,7 +23,7 @@ $csp_nonce = $csp_nonce ?? '';
         <i class="bi bi-list"></i>
     </button>
     <div class="user-section">
-        <span style="color: var(--muted-text); font-size: 0.9rem;">
+        <span style="color: var(--muted-text);">
             <i class="bi bi-person-circle"></i> Administrateur
         </span>
     </div>
@@ -58,7 +58,7 @@ $csp_nonce = $csp_nonce ?? '';
 
     <a href="/dons/simulation" class="menu-item <?= $current_page === '/dons/simulation' ? 'active' : '' ?>">
         <i class="bi bi-graph-up-arrow"></i>
-        <span>Simulation</span>
+        <span>Simulation / Distribution</span>
     </a>
     
     <a href="/historique-achats" class="menu-item <?= str_contains($current_page, '/historique-achats') ? 'active' : '' ?>">

@@ -27,6 +27,19 @@ body {
     line-height: 1.6;
 }
 
+/* Force la cohérence de toutes les polices au chargement */
+body * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Empêcher le flash de contenu non stylé (FOUC) */
+html {
+    visibility: visible;
+    opacity: 1;
+}
+
 /* Topbar */
 .topbar {
     position: fixed;
@@ -44,7 +57,7 @@ body {
 }
 
 .topbar .brand {
-    font-size: 1.4rem;
+    font-size: 1.25rem !important;
     font-weight: 700;
     color: var(--primary-color);
     display: flex;
@@ -54,6 +67,7 @@ body {
 
 .topbar .brand i {
     color: var(--secondary-color);
+    font-size: 1.25rem !important;
 }
 
 .topbar .user-section {
@@ -61,6 +75,10 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+.topbar .user-section span {
+    font-size: 0.9rem !important;
 }
 
 /* Sidebar */
@@ -78,15 +96,15 @@ body {
 }
 
 .sidebar-section-title {
-    padding: 20px 20px 10px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    padding: 15px 20px 8px;
+    font-size: 0.75rem !important;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: var(--muted-text);
-    letter-spacing: 1px;
 }
 
-.sidebar .menu-item {
+.menu-item {
     display: flex;
     align-items: center;
     padding: 12px 20px;
@@ -94,16 +112,23 @@ body {
     text-decoration: none;
     transition: var(--transition);
     border-left: 3px solid transparent;
+    font-size: 0.95rem !important;
+    font-weight: 500;
 }
 
-.sidebar .menu-item i {
-    width: 24px;
+.menu-item i {
+    font-size: 1.1rem !important;
     margin-right: 12px;
-    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
 }
 
-.sidebar .menu-item:hover {
-    background-color: rgba(39, 174, 96, 0.05);
+.menu-item span {
+    font-size: 0.95rem !important;
+}
+
+.menu-item:hover {
+    background-color: var(--light-bg);
     border-left-color: var(--secondary-color);
 }
 
@@ -120,6 +145,7 @@ body {
     margin-top: var(--topbar-height);
     padding: 30px;
     min-height: calc(100vh - var(--topbar-height));
+    font-size: 1rem !important;
 }
 
 /* Cards */
@@ -137,10 +163,12 @@ body {
     padding: 15px 20px;
     font-weight: 600;
     color: var(--primary-color);
+    font-size: 1rem !important;
 }
 
 .card-body {
     padding: 20px;
+    font-size: 0.95rem !important;
 }
 
 /* Buttons */
@@ -155,6 +183,11 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-size: 0.95rem !important;
+}
+
+.btn i {
+    font-size: 1rem !important;
 }
 
 .btn-primary {
@@ -224,13 +257,14 @@ body {
     font-weight: 600;
     color: var(--primary-color);
     border-bottom: 2px solid var(--border-color);
-    font-size: 0.9rem;
+    font-size: 0.85rem !important;
     text-transform: uppercase;
 }
 
 .table tbody td {
     padding: 12px;
     border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem !important;
 }
 
 .table tbody tr:hover {
@@ -241,7 +275,7 @@ body {
 .badge {
     padding: 4px 10px;
     border-radius: 12px;
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
     font-weight: 600;
 }
 
@@ -385,4 +419,114 @@ body {
     color: var(--primary-color);
     cursor: pointer;
     margin-left: auto;
+}
+
+/* Section Header - Force consistance */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.section-header h4 {
+    margin: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.5rem !important;
+}
+
+.section-header h4 i {
+    font-size: 1.5rem !important;
+}
+
+/* Main Content - Force la taille de police de base */
+.main-content {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--topbar-height);
+    padding: 30px;
+    min-height: calc(100vh - var(--topbar-height));
+    font-size: 1rem !important;
+}
+
+/* Force taille de police cohérente pour tous les titres */
+.main-content h1 {
+    font-size: 2rem !important;
+}
+
+.main-content h2 {
+    font-size: 1.75rem !important;
+}
+
+.main-content h3 {
+    font-size: 1.5rem !important;
+}
+
+.main-content h4 {
+    font-size: 1.25rem !important;
+}
+
+.main-content h5 {
+    font-size: 1.1rem !important;
+}
+
+.main-content h6 {
+    font-size: 1rem !important;
+}
+
+/* Force taille cohérente pour les textes */
+.main-content p,
+.main-content td,
+.main-content th,
+.main-content label,
+.main-content .form-control,
+.main-content .form-select {
+    font-size: 0.95rem !important;
+}
+
+/* Tables - Force cohérence */
+.table thead th {
+    background-color: var(--light-bg);
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    font-size: 0.85rem !important;
+    text-transform: uppercase;
+}
+
+.table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem !important;
+}
+
+/* Badges - Force cohérence */
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem !important;
+    font-weight: 600;
+}
+
+/* Buttons - Force cohérence */
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem !important;
+}
+
+.btn i {
+    font-size: 1rem !important;
 }
