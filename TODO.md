@@ -84,10 +84,10 @@
     - [x] bouton pour réinitialiser la base de données
     - [x] lorsqu'on clique sur le bouton, on supprime toutes les données de la base de données et on remet la base a ses donnees de depart
 
-- [ ] page d'insertion de besoins (TSOA)
-    - [ ] formulaire pour ajouter un besoin
-    - [ ] validation du formulaire
-    - [ ] fonction pour ajouter un besoin à la base de données
+- [x] page d'insertion de besoins (TSOA)
+    - [x] formulaire pour ajouter un besoin
+    - [x] validation du formulaire
+    - [x] fonction pour ajouter un besoin à la base de données
 
 - [ ] modifier page simulation (MANA + GIOVANNI)
     - formulaire de distribution
