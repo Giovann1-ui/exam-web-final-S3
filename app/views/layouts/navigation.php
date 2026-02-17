@@ -57,7 +57,7 @@ $csp_nonce = $csp_nonce ?? '';
 
     <a href="/dons/simulation" class="menu-item <?= $current_page === '/dons/simulation' ? 'active' : '' ?>">
         <i class="bi bi-graph-up-arrow"></i>
-        <span>Simulation</span>
+        <span>Simulation / Distribution</span>
     </a>
     
     <a href="/historique-achats" class="menu-item <?= str_contains($current_page, '/historique-achats') ? 'active' : '' ?>">
