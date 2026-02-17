@@ -44,10 +44,10 @@
     - !! Colonnes suggérées : Date de l'achat, Ville, Article acheté, Quantité, Prix unitaire, Frais appliqués, et Total payé
     - [x] possibilité de filtrer par ville (ou par date)
 
-- [ ] page de simulation (MANA)
-    - [ ] saisie de dons, pas directement dans la fonctionnalite de dispatch "immediat". Juste insertion dans la table 'dons'
-    - [ ] bouton simuler qui permet de voir le résulat (simuler distribution pour visualier ou va les dons)
-    - [ ] bouton validation qui dispatch vraiment les dons
+- [x] page de simulation (MANA)
+    - [x] saisie de dons, pas directement dans la fonctionnalite de dispatch "immediat". Juste insertion dans la table 'dons'
+    - [x] bouton simuler qui permet de voir le résulat (simuler distribution pour visualier ou va les dons)
+    - [x] bouton validation qui dispatch vraiment les dons
 
 - [x] Créer la classe `RecapModel`.
   - [x] **Méthode `getTotalBesoins()`** : Requête SQL `SUM(quantite * prix_unitaire)` sur `besoins_ville` + `besoins`.
@@ -76,9 +76,9 @@
     - [x] Dans le `.then()`, parser le JSON.
     - [x] Mettre à jour le contenu HTML des cartes via `innerHTML` ou `innerText`.
   - [x] **Auto-load** : Ajouter l'appel à la fonction au chargement (`window.onload`).
-        - (pas directement inserer dans la base de donnee, juste histoire de voir(visualiser) l'action va se passer      prochainement)
-    - [ ] bouton validation qui dispatch vraiment les dons 
-        - (insertion directe dans la base de ce qu'on venait de voir dans la simulation)
+        - [x] (pas directement inserer dans la base de donnee, juste histoire de voir(visualiser) l'action va se passer      prochainement)
+    - [c] bouton validation qui dispatch vraiment les dons 
+        - [x] (insertion directe dans la base de ce qu'on venait de voir dans la simulation)
 
 - [x] page de reinitialisation de la base de données (TSOA)
     - [x] bouton pour réinitialiser la base de données
