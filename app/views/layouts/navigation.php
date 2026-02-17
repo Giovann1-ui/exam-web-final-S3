@@ -82,10 +82,12 @@ $csp_nonce = $csp_nonce ?? '';
         <span>Villes</span>
     </a>
     
-    <a href="/reset" class="menu-item text-danger" id="reset-database-btn">
-        <i class="bi bi-arrow-clockwise"></i>
-        <span>Réinitialiser la Base</span>
-    </a>
+    <form method="POST" action="/reset" style="margin: 0;" onsubmit="return confirm('Are you sure ?')">
+        <button type="submit" class="menu-item text-danger" style="width: 100%; border: none; background: none; cursor: pointer; text-align: left;">
+            <i class="bi bi-arrow-clockwise"></i>
+            <span>Reset Database</span>
+        </button>
+    </form>
 </div>
 
 <script nonce="<?= $csp_nonce ?>">

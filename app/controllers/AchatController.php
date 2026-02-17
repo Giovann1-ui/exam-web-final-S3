@@ -50,7 +50,6 @@ class AchatController
             return;
         }
 
-        // Vérifier s'il y a du stock
         if ($achatModel->hasStockDisponible($besoin['besoin_id'])) {
             Flight::redirect('/achats/besoins?error=' . urlencode("Impossible d'acheter : du stock est déjà disponible pour " . $besoin['nom_besoin']));
             return;

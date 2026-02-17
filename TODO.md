@@ -80,9 +80,9 @@
     - [ ] bouton validation qui dispatch vraiment les dons 
         - (insertion directe dans la base de ce qu'on venait de voir dans la simulation)
 
-- [ ] page de reinitialisation de la base de données (TSOA)
-    - [ ] bouton pour réinitialiser la base de données
-    - [?] lorsqu'on clique sur le bouton, on supprime toutes les données de la base de données et on remet la base a ses donnees de depart
+- [x] page de reinitialisation de la base de données (TSOA)
+    - [x] bouton pour réinitialiser la base de données
+    - [x] lorsqu'on clique sur le bouton, on supprime toutes les données de la base de données et on remet la base a ses donnees de depart
 
 - [ ] page d'insertion de besoins (TSOA)
     - [ ] formulaire pour ajouter un besoin

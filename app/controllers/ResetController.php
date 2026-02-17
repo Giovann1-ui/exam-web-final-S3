@@ -6,55 +6,54 @@ use PDO;
 
 class ResetController
 {
-    public function showResetPage()
-    {
-        $csp_nonce = Flight::get('csp_nonce');
-        Flight::render('reset', ['csp_nonce' => $csp_nonce]);
-    }
-
     public function resetDatabase()
     {
         try {
             $db = Flight::db();
             
-            $sqlFile = __DIR__ . '/../../sql/insertionBase.sql';
+            // Chemin vers le fichier SQL d'origine
+            $sqlFile = __DIR__ . '/../../sql/16-02-2026_06.sql';
             
             if (!file_exists($sqlFile)) {
-                Flight::json([
-                    'success' => false,
-                    'message' => 'Fichier SQL introuvable'
-                ], 404);
+                Flight::redirect('/?error=sql_file_not_found');
                 return;
             }
             
+            // Lire le contenu du fichier SQL
             $sql = file_get_contents($sqlFile);
             
+            if (empty($sql)) {
+                Flight::redirect('/?error=sql_file_empty');
+                return;
+            }
+            
+            // Désactiver temporairement les contraintes de clés étrangères
             $db->exec('SET FOREIGN_KEY_CHECKS = 0');
             
-            $db->exec('TRUNCATE TABLE distributions');
-            $db->exec('TRUNCATE TABLE dons');
-            $db->exec('TRUNCATE TABLE achats');
-            $db->exec('TRUNCATE TABLE achats_besoins');
-            $db->exec('TRUNCATE TABLE frais_achat_besoin');
-            $db->exec('TRUNCATE TABLE besoins_ville');
-            $db->exec('TRUNCATE TABLE besoins');
-            $db->exec('TRUNCATE TABLE types_besoin');
-            $db->exec('TRUNCATE TABLE villes');
+            // Diviser le script SQL en requêtes individuelles
+            $statements = array_filter(
+                array_map('trim', explode(';', $sql)),
+                function($stmt) {
+                    return !empty($stmt) && !preg_match('/^--/', $stmt);
+                }
+            );
             
+            // Exécuter chaque requête séparément
+            foreach ($statements as $statement) {
+                if (!empty($statement)) {
+                    $db->exec($statement);
+                }
+            }
+            
+            // Réactiver les contraintes
             $db->exec('SET FOREIGN_KEY_CHECKS = 1');
             
-            $db->exec($sql);
-            
-            Flight::json([
-                'success' => true,
-                'message' => 'Base de données réinitialisée avec succès !'
-            ]);
+            // Rediriger vers la page d'accueil avec succès
+            Flight::redirect('/?success=database_reset');
             
         } catch (\Exception $e) {
-            Flight::json([
-                'success' => false,
-                'message' => 'Erreur : ' . $e->getMessage()
-            ], 500);
+            error_log("Erreur réinitialisation BD: " . $e->getMessage());
+            Flight::redirect('/?error=' . urlencode($e->getMessage()));
         }
     }
 }
