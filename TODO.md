@@ -79,3 +79,24 @@
         - (pas directement inserer dans la base de donnee, juste histoire de voir(visualiser) l'action va se passer      prochainement)
     - [ ] bouton validation qui dispatch vraiment les dons 
         - (insertion directe dans la base de ce qu'on venait de voir dans la simulation)
+
+- [ ] page de reinitialisation de la base de données (TSOA)
+    - [ ] bouton pour réinitialiser la base de données
+    - [?] lorsqu'on clique sur le bouton, on supprime toutes les données de la base de données et on remet la base a ses donnees de depart
+
+- [ ] page d'insertion de besoins (TSOA)
+    - [ ] formulaire pour ajouter un besoin
+    - [ ] validation du formulaire
+    - [ ] fonction pour ajouter un besoin à la base de données
+
+- [ ] modifier page simulation (MANA + GIOVANNI)
+    - formulaire de distribution
+        - [ ] selection de type de distribution
+        - [ ] trois type de distribution
+            - [ ] par date de demande en premier (existe deja)
+            - [ ] par demande minimum
+            - [ ] proportionnelle
+        - [ ] fonctions par demande minimum (MANA)
+        - [ ] fonctions pour la distribution proportionnelle (GIOVANNI)
+            - ex : si une ville A a besoin de 1 kg de riz et une ville B a besoin de 2 kg de riz et une ville C a besoin de 5 kg de riz et qu'on a 6 kg, alors on donne 1/6 a la ville A, 2/6 a la ville B et 5/6 a la ville C
+    - [ ] quand on clique sur simuler, on prend aussi l'id du type de distribution
