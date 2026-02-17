@@ -87,6 +87,9 @@ $csp_nonce = $csp_nonce ?? '';
     </div>
 </div>
 
+<?php include __DIR__ . '/layouts/footer.php'; ?>
+
+
 <script nonce="<?= $csp_nonce ?>">
     // French currency formatter with thousands separator and two decimals
     const formatter = new Intl.NumberFormat('fr-FR', {

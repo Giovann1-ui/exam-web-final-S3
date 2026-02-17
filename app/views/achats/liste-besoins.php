@@ -145,6 +145,7 @@ $argent_disponible = $argent_disponible ?? 0;
         </div>
     </div>
 </div>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>
 
 </body>
 </html>

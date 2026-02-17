@@ -6,8 +6,8 @@ $csp_nonce = $csp_nonce ?? '';
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
 
 <title>Tableau de Bord - BNGRC</title>
- <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/bootstrap-icons/font/bootstrap-icons.css">
+<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/bootstrap-icons/font/bootstrap-icons.css">
 <style nonce="<?= $csp_nonce ?>">
     .section-header {
         display: flex;
@@ -17,27 +17,27 @@ $csp_nonce = $csp_nonce ?? '';
         padding-bottom: 10px;
         border-bottom: 2px solid var(--border-color);
     }
-    
+
     .section-header h4 {
         margin: 0;
         color: var(--primary-color);
         font-weight: 600;
     }
-    
+
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 20px;
         margin-bottom: 30px;
     }
-    
+
     .ville-group {
         margin-bottom: 30px;
         border: 1px solid var(--border-color);
         border-radius: 8px;
         overflow: hidden;
     }
-    
+
     .ville-header {
         background-color: var(--light-bg);
         padding: 15px 20px;
@@ -46,36 +46,36 @@ $csp_nonce = $csp_nonce ?? '';
         align-items: center;
         border-bottom: 1px solid var(--border-color);
     }
-    
+
     .ville-header h5 {
         margin: 0;
         color: var(--primary-color);
         font-weight: 600;
     }
-    
+
     .badge-pill {
         padding: 6px 14px;
         border-radius: 20px;
         font-size: 0.85rem;
         font-weight: 600;
     }
-    
+
     .badge-danger {
         background-color: #f8d7da;
         color: #721c24;
     }
-    
+
     .badge-success {
         background-color: #d1f2eb;
         color: #0c5e4c;
     }
-    
+
     .list-group-item {
         border: none;
         border-bottom: 1px solid var(--border-color);
         padding: 15px;
     }
-    
+
     .list-group-item:last-child {
         border-bottom: none;
     }
@@ -95,7 +95,7 @@ $csp_nonce = $csp_nonce ?? '';
             </a>
         </div>
     </div>
-    
+
     <!-- Statistiques -->
     <div class="stats-grid">
         <div class="card stat-card" style="border-left-color: var(--accent-color);">
@@ -154,30 +154,34 @@ $csp_nonce = $csp_nonce ?? '';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($ville['besoins'] as $besoin): 
-                                            $progression = $besoin['quantite'] > 0 
+                                        <?php foreach ($ville['besoins'] as $besoin):
+                                            $progression = $besoin['quantite'] > 0
                                                 ? round((($besoin['quantite'] - $besoin['quantite_restante']) / $besoin['quantite']) * 100, 1)
                                                 : 0;
                                             $typeBadgeClass = 'badge-' . strtolower($besoin['nom_type_besoin']);
-                                        ?>
-                                        <tr>
-                                            <td style="color: var(--muted-text); font-size: 0.9rem;">
-                                                <?= date('d/m/Y', strtotime($besoin['date_besoin'])) ?>
-                                            </td>
-                                            <td class="fw-semibold"><?= htmlspecialchars($besoin['nom_besoin']) ?></td>
-                                            <td><span class="badge <?= $typeBadgeClass ?>"><?= htmlspecialchars($besoin['nom_type_besoin']) ?></span></td>
-                                            <td style="text-align: right; color: var(--danger-color); font-weight: 600;">
-                                                <?= number_format($besoin['quantite_restante']) ?>
-                                            </td>
-                                            <td>
-                                                <div style="display: flex; align-items: center; gap: 10px;">
-                                                    <div class="progress" style="flex: 1;">
-                                                        <div class="progress-bar bg-warning" style="width: <?= $progression ?>%"></div>
+                                            ?>
+                                            <tr>
+                                                <td style="color: var(--muted-text); font-size: 0.9rem;">
+                                                    <?= date('d/m/Y', strtotime($besoin['date_besoin'])) ?>
+                                                </td>
+                                                <td class="fw-semibold"><?= htmlspecialchars($besoin['nom_besoin']) ?></td>
+                                                <td><span
+                                                        class="badge <?= $typeBadgeClass ?>"><?= htmlspecialchars($besoin['nom_type_besoin']) ?></span>
+                                                </td>
+                                                <td style="text-align: right; color: var(--danger-color); font-weight: 600;">
+                                                    <?= number_format($besoin['quantite_restante']) ?>
+                                                </td>
+                                                <td>
+                                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                                        <div class="progress" style="flex: 1;">
+                                                            <div class="progress-bar bg-warning"
+                                                                style="width: <?= $progression ?>%"></div>
+                                                        </div>
+                                                        <span
+                                                            style="font-size: 0.85rem; color: var(--muted-text);"><?= $progression ?>%</span>
                                                     </div>
-                                                    <span style="font-size: 0.85rem; color: var(--muted-text);"><?= $progression ?>%</span>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -190,7 +194,7 @@ $csp_nonce = $csp_nonce ?? '';
             <!-- Besoins attribués -->
             <div class="section-container border-top border-success border-4">
                 <h4 class="mb-4 text-success"><i class="bi bi-check-circle me-2"></i>Besoins attribués par ville</h4>
-                
+
                 <?php if (empty($besoins_attribues)): ?>
                     <p class="text-muted small">Aucun besoin n'a encore été attribué.</p>
                 <?php else: ?>
@@ -212,18 +216,24 @@ $csp_nonce = $csp_nonce ?? '';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($ville['besoins'] as $besoin): 
+                                        <?php foreach ($ville['besoins'] as $besoin):
                                             $typeBadgeClass = 'badge-' . strtolower($besoin['nom_type_besoin']);
-                                        ?>
-                                        <tr>
-                                            <td class="small text-muted"><?= date('d/m/Y', strtotime($besoin['date_besoin'])) ?></td>
-                                            <td><span class="fw-semibold"><?= htmlspecialchars($besoin['nom_besoin']) ?></span></td>
-                                            <td><span class="badge <?= $typeBadgeClass ?>"><?= htmlspecialchars($besoin['nom_type_besoin']) ?></span></td>
-                                            <td class="text-end text-muted"><?= number_format($besoin['quantite_initiale']) ?></td>
-                                            <td class="text-end">
-                                                <span class="badge bg-success fs-6"><?= number_format($besoin['quantite_attribuee']) ?></span>
-                                            </td>
-                                        </tr>
+                                            ?>
+                                            <tr>
+                                                <td class="small text-muted"><?= date('d/m/Y', strtotime($besoin['date_besoin'])) ?>
+                                                </td>
+                                                <td><span class="fw-semibold"><?= htmlspecialchars($besoin['nom_besoin']) ?></span>
+                                                </td>
+                                                <td><span
+                                                        class="badge <?= $typeBadgeClass ?>"><?= htmlspecialchars($besoin['nom_type_besoin']) ?></span>
+                                                </td>
+                                                <td class="text-end text-muted"><?= number_format($besoin['quantite_initiale']) ?>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span
+                                                        class="badge bg-success fs-6"><?= number_format($besoin['quantite_attribuee']) ?></span>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -241,17 +251,17 @@ $csp_nonce = $csp_nonce ?? '';
                 <?php else: ?>
                     <div class="row row-cols-1 row-cols-md-2 g-3">
                         <?php foreach ($villes_satisfait as $v_sat): ?>
-                        <div class="col">
-                            <div class="card card-satisfied p-3 d-flex flex-row align-items-center shadow-sm">
-                                <div class="me-3">
-                                    <i class="bi bi-check-circle-fill icon-satisfied"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0 fw-bold"><?= htmlspecialchars($v_sat['nom_ville']) ?></h6>
-                                    <small class="text-success">Tous besoins comblés</small>
+                            <div class="col">
+                                <div class="card card-satisfied p-3 d-flex flex-row align-items-center shadow-sm">
+                                    <div class="me-3">
+                                        <i class="bi bi-check-circle-fill icon-satisfied"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold"><?= htmlspecialchars($v_sat['nom_ville']) ?></h6>
+                                        <small class="text-success">Tous besoins comblés</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
@@ -270,8 +280,10 @@ $csp_nonce = $csp_nonce ?? '';
                         <p class="text-muted" style="text-align: center;">Aucune ville entièrement satisfaite</p>
                     <?php else: ?>
                         <?php foreach ($villes_satisfait as $v_sat): ?>
-                            <div style="display: flex; align-items: center; padding: 12px; background-color: rgba(39, 174, 96, 0.05); border-radius: 6px; margin-bottom: 10px;">
-                                <i class="bi bi-check-circle-fill" style="color: var(--success-color); font-size: 1.5rem; margin-right: 12px;"></i>
+                            <div
+                                style="display: flex; align-items: center; padding: 12px; background-color: rgba(39, 174, 96, 0.05); border-radius: 6px; margin-bottom: 10px;">
+                                <i class="bi bi-check-circle-fill"
+                                    style="color: var(--success-color); font-size: 1.5rem; margin-right: 12px;"></i>
                                 <div>
                                     <div class="fw-bold"><?= htmlspecialchars($v_sat['nom_ville']) ?></div>
                                     <small class="text-success">Tous besoins comblés</small>
@@ -322,6 +334,9 @@ $csp_nonce = $csp_nonce ?? '';
         </div>
     </div>
 </div>
+<?php include __DIR__ . '/layouts/footer.php'; ?>
+
 
 </body>
+
 </html>

@@ -195,6 +195,7 @@ $montant_total = $montant_total ?? 0;
         </div>
     </div>
 </div>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>
 
 <script nonce="<?= $csp_nonce ?>">
     // Calculer dynamiquement le montant en fonction de la quantité

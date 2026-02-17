@@ -54,6 +54,7 @@ $csp_nonce = $csp_nonce ?? '';
         </div>
     </div>
 </div>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>
 
 </body>
 </html>

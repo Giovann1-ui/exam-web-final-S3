@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulation de Distribution - BNGRC</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        /* Bloque toutes les transitions au chargement */
+        * {
+            transition: none !important;
+        }
+    </style>
 </head>
 <body>
     <?php 
 $csp_nonce = $csp_nonce ?? '';
 ?>
 <?php include __DIR__ . '/layouts/navigation.php'; ?>
-
-<title>Simulation de Distribution - BNGRC</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
 <style nonce="<?= $csp_nonce ?>">
     .simulation-header {
@@ -67,14 +67,8 @@ $csp_nonce = $csp_nonce ?? '';
         color: #495057;
     }
     
-    .table-simulation tbody tr {
-        transition: all 0.2s ease;
-    }
-    
     .table-simulation tbody tr:hover {
         background-color: #f8f9fa;
-        transform: scale(1.01);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     
     .badge-type {
@@ -131,13 +125,12 @@ $csp_nonce = $csp_nonce ?? '';
         border-radius: 50px;
         font-weight: 600;
         font-size: 1.1rem;
-        transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(51, 84, 249, 0.3);
+        cursor: pointer;
     }
     
     .btn-simulate:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(96, 120, 234, 0.4);
+        opacity: 0.9;
     }
     
     .btn-validate {
@@ -148,13 +141,12 @@ $csp_nonce = $csp_nonce ?? '';
         border-radius: 50px;
         font-weight: 600;
         font-size: 1.1rem;
-        transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
+        cursor: pointer;
     }
     
     .btn-validate:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(56, 239, 125, 0.4);
+        opacity: 0.9;
     }
     
     .alert-custom {
@@ -177,7 +169,7 @@ $csp_nonce = $csp_nonce ?? '';
     }
     
     .distribution-table thead {
-        background: linear-gradient(135deg, #667eea 0%, #0e600f 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
     }
     
@@ -199,23 +191,9 @@ $csp_nonce = $csp_nonce ?? '';
     }
     
     .quantity-distributed {
-        color: #38ef7d;
+        color: #11998e;
         font-weight: 700;
         font-size: 1.1rem;
-    }
-    
-    .progress-bar-custom {
-        height: 8px;
-        border-radius: 10px;
-        background-color: #e9ecef;
-        margin-top: 0.5rem;
-    }
-    
-    .progress-bar-custom .progress {
-        height: 100%;
-        border-radius: 10px;
-        background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-        transition: width 0.3s ease;
     }
     
     .no-data-message {
@@ -230,25 +208,10 @@ $csp_nonce = $csp_nonce ?? '';
         margin-bottom: 1rem;
         display: block;
     }
-    
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .animated-card {
-        animation: slideIn 0.5s ease;
-    }
 </style>
 
 <div class="main-content">
-    <div class="simulation-header animated-card">
+    <div class="simulation-header">
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h1><i class="bi bi-graph-up-arrow me-3"></i>Simulation de Distribution</h1>
@@ -261,21 +224,20 @@ $csp_nonce = $csp_nonce ?? '';
     </div>
 
     <?php if (isset($success)): ?>
-        <div class="alert alert-success alert-custom animated-card" role="alert">
+        <div class="alert alert-success alert-custom" role="alert">
             <i class="bi bi-check-circle-fill me-2"></i>
             <?= htmlspecialchars($success) ?>
         </div>
     <?php endif; ?>
 
     <?php if (isset($error)): ?>
-        <div class="alert alert-danger alert-custom animated-card" role="alert">
+        <div class="alert alert-danger alert-custom" role="alert">
             <i class="bi bi-exclamation-triangle-fill me-2"></i>
             <?= htmlspecialchars($error) ?>
         </div>
     <?php endif; ?>
 
-    <!-- Dons en attente -->
-    <div class="card-custom animated-card">
+    <div class="card-custom">
         <div class="card-header-custom">
             <h5 class="mb-0"><i class="bi bi-box-seam me-2"></i>Dons en attente de distribution</h5>
         </div>
@@ -324,15 +286,14 @@ $csp_nonce = $csp_nonce ?? '';
         </div>
     </div>
 
-    <!-- Résultats de simulation -->
     <?php if (isset($simulation_results) && !empty($simulation_results)): ?>
-        <div class="card-custom animated-card" style="animation-delay: 0.2s;">
+        <div class="card-custom">
             <div class="card-header-success">
                 <h5 class="mb-0"><i class="bi bi-eye me-2"></i>Résultats de la simulation</h5>
             </div>
             <div class="card-body">
                 <?php foreach ($simulation_results as $index => $result): ?>
-                    <div class="simulation-result-card" style="animation-delay: <?= 0.3 + ($index * 0.1) ?>s;">
+                    <div class="simulation-result-card">
                         <h6>
                             <i class="bi bi-gift-fill me-2"></i>
                             Don de <?= htmlspecialchars($result['don']['nom_donneur']) ?> - 
@@ -393,11 +354,10 @@ $csp_nonce = $csp_nonce ?? '';
                 <div class="alert alert-warning-custom alert-custom">
                     <i class="bi bi-exclamation-triangle-fill me-2"></i>
                     <strong>Attention :</strong> Cette simulation ne modifie pas la base de données. 
-                    Cliquez sur "Valider la distribution" pour appliquer définitivement ces changements.
                 </div>
 
                 <div class="text-center">
-                    <form method="POST" action="/dons/valider" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir valider cette distribution ?\n\nCette action est IRRÉVERSIBLE et modifiera définitivement la base de données.');">
+                    <form method="POST" action="/dons/valider" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr ?');">
                         <button type="submit" class="btn btn-validate">
                             <i class="bi bi-check-circle-fill me-2"></i>Valider la distribution
                         </button>
@@ -408,6 +368,6 @@ $csp_nonce = $csp_nonce ?? '';
     <?php endif; ?>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php include __DIR__ . '/layouts/footer.php'; ?>
 </body>
 </html>
