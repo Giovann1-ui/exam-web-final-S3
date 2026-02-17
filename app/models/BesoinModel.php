@@ -32,19 +32,18 @@ class BesoinModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getVilles(): array
+    public function getVilles()
     {
+        if ($this->db === null) {
+            throw new \Exception('Database connection is null in BesoinModel');
+        }
+
         $stmt = $this->db->query("SELECT id, nom_ville FROM villes ORDER BY nom_ville");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getTypeBesoins(): array
-    {
-        $stmt = $this->db->query("SELECT id, nom_type_besoin FROM types_besoin ORDER BY nom_type_besoin");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
-    public function getBesoinsWithTypes(): array
+    public function getBesoinsWithTypes()
     {
         $stmt = $this->db->query("
             SELECT b.id, b.nom_besoin, b.prix_unitaire, tb.nom_type_besoin

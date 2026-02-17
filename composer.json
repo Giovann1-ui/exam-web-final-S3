@@ -25,7 +25,8 @@
         "ext-json": "*",
         "flightphp/core": "^3.0",
         "flightphp/runway": "^0.2 || ^1.1",
-        "tracy/tracy": "^2.9"
+        "tracy/tracy": "^2.9",
+      "ext-pdo": "*"
     },
     "config": {
         "process-timeout": 0,
