@@ -39,7 +39,7 @@ CREATE TABLE besoins_ville (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_besoin DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_besoin DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (ville_id) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -50,7 +50,7 @@ CREATE TABLE dons (
     besoin_id int NOT NULL,
     quantite int NOT NULL,
     quantite_restante int NOT NULL,
-    date_don DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_don DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
 
@@ -59,7 +59,7 @@ CREATE TABLE distributions (
     id_ville int NOT NULL,
     besoin_id int NOT NULL,
     quantite int NOT NULL,
-    date_distribution DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_distribution DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (id_ville) REFERENCES villes(id),
     FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -75,7 +75,7 @@ CREATE TABLE achats_besoins (
     id int AUTO_INCREMENT PRIMARY KEY,
     besoin_ville_id int NOT NULL,
     quantite int NOT NULL,
-    date_achat DATE NOT NULL DEFAULT CURRENT_DATE,
+    date_achat DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (besoin_ville_id) REFERENCES besoins_ville(id)
 );
 
@@ -88,7 +88,7 @@ CREATE TABLE achats (
                         prix_unitaire_ht DECIMAL(10, 2), -- Prix du produit au moment de l'achat
                         frais_pourcentage DECIMAL(5, 2), -- Le x% de frais configuré
                         montant_total_ttc DECIMAL(15, 2), -- (Qté * Prix) * (1 + x/100)
-                        date_achat TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        date_achat TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
                         FOREIGN KEY (ville_id) REFERENCES villes(id),
                         FOREIGN KEY (besoin_id) REFERENCES besoins(id)
 );
@@ -134,9 +134,9 @@ INSERT INTO besoins_ville (ville_id, besoin_id, quantite, quantite_restante) VAL
 (3, 3, 400, 400);
 
 INSERT INTO frais_achat_besoin (besoin_id, frais) VALUES
-(1, 10), -- Frais pour le riz
-(2, 20), -- Frais pour la tôle
-(3, 0); -- Frais pour l'argent
+(1, 10),
+(2, 20),
+(3, 0); 
 
 
 -- INSERT INTO dons (nom_donneur, besoin_id, quantite, quantite_restante) VALUES
