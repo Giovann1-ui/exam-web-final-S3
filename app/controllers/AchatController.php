@@ -146,10 +146,7 @@ class AchatController
             // Insérer l'achat
             $achat_id = $achatModel->insertAchat(
                 $besoin_ville_id,
-                $quantite,
-                $prix_unitaire,
-                $frais_pourcentage,
-                $date_achat_sql
+                $quantite
             );
 
             if (!$achat_id) {

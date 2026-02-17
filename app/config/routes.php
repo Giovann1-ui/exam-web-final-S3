@@ -33,8 +33,8 @@ $router->group('', function (Router $router) use ($app) {
     $router->group('/dons', function () use ($router) {
         $router->get('/give', [BesoinController::class, 'all_besoins']);
         $router->post('/add', [DonsController::class, 'store']);
-        $router->get('/besoin/@id:[0-9]', [BesoinController::class, 'besoin']);
-        $router->get('/type-besoin/@id:[0-9]', [BesoinController::class, 'besoin']);
+        $router->get('/besoin/@id:[0-9]+', [BesoinController::class, 'besoin']);
+        $router->get('/type-besoin/@id:[0-9]+', [BesoinController::class, 'besoin']);
     });
 
     Flight::route('/recap', [new RecapController(), 'recap']);
@@ -45,7 +45,7 @@ $router->group('', function (Router $router) use ($app) {
     Flight::route('POST /dons/valider', [DonsController::class, 'valider']);
 
     $router->get('/achats/besoins', [AchatController::class, 'listBesoinsAcheter']);
-    $router->get('/achats/form/@id:[0-9]', [AchatController::class, 'showFormAchat']);
+    $router->get('/achats/form/@id:[0-9]+', [AchatController::class, 'showFormAchat']);
     $router->post('/achats/add', [AchatController::class, 'addAchat']);
 
     Flight::route('GET /besoins/insert', [BesoinController::class, 'showInsertionForm']);
