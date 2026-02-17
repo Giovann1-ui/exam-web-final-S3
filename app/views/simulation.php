@@ -277,6 +277,12 @@ $csp_nonce = $csp_nonce ?? '';
                 </div>
                 <div class="text-center p-4">
                     <form method="POST" action="/dons/simuler" class="d-inline">
+                        <select name="simulation_type" id="simulation_type" class="form-select form-select-sm mb-2">
+                            <option value="">Sélectionnez un type de simulation</option>
+                            <option value="chrono">Par ordre chronologique</option>
+                            <option value="min">Besoin Minimal</option>
+                            <option value="prop">Proportionnelle</option>
+                        </select>
                         <button type="submit" class="btn btn-simulate">
                             <i class="bi bi-play-circle me-2"></i>Lancer la simulation
                         </button>
@@ -358,6 +364,7 @@ $csp_nonce = $csp_nonce ?? '';
 
                 <div class="text-center">
                     <form method="POST" action="/dons/valider" class="d-inline" onsubmit="return confirm('⚠️ Êtes-vous sûr ?');">
+                        <input type="hidden" name="simulation_type" value="<?= htmlspecialchars($simulation_type ?? 'chrono') ?>">
                         <button type="submit" class="btn btn-validate">
                             <i class="bi bi-check-circle-fill me-2"></i>Valider la distribution
                         </button>

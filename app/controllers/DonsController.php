@@ -12,7 +12,6 @@ class DonsController
         $donsModel = new DonModels(Flight::db());
         $dons = $donsModel->getAllDons();
         
-        // Récupérer le nonce CSP depuis l'application
         $csp_nonce = Flight::get('csp_nonce');
         
         Flight::render('dons/index', [
@@ -102,12 +101,21 @@ class DonsController
      * Dispatch automatique du don vers les villes ayant des besoins
      * Retourne le nombre de distributions effectuées
      */
-    private function dispatchDon($don_id, $besoin_id, $quantite_disponible, $date_distribution)
+    private function dispatchDon($don_id, $besoin_id, $quantite_disponible, $date_distribution, $simulation_type = 'chrono')
     {
         $donsModel = new DonModels(Flight::db());
         
         // Récupérer tous les besoins des villes pour ce type de besoin
         $besoins_villes = $donsModel->getBesoinsVilleByBesoinId($besoin_id);
+        
+        // Trier selon le type de simulation
+        if ($simulation_type === 'min') {
+            // Trier par quantité restante croissante (besoin minimal en premier)
+            usort($besoins_villes, function($a, $b) {
+                return $a['quantite_restante'] <=> $b['quantite_restante'];
+            });
+        }
+        // Pour 'chrono', on garde l'ordre par défaut (date_besoin ASC)
         
         $distributions_count = 0;
         $quantite_restante_don = $quantite_disponible;
@@ -116,7 +124,7 @@ class DonsController
             if ($quantite_restante_don <= 0) {
                 break;
             }
-
+            
             $quantite_besoin_ville = $besoin_ville['quantite_restante'];
             
             if ($quantite_besoin_ville > 0) {
@@ -243,7 +251,9 @@ class DonsController
         try {
             $donsModel = new DonModels(Flight::db());
             
-            // Récupérer tous les dons non distribués
+            // Récupérer le type de simulation choisi
+            $simulation_type = Flight::request()->data->simulation_type ?? 'chrono';
+            
             $dons_non_distribues = $donsModel->getDonsNonDistribues();
             
             $simulation_results = [];
@@ -253,11 +263,12 @@ class DonsController
                     continue;
                 }
                 
-                // Simuler le dispatch pour ce don
+                // Simuler le dispatch pour ce don selon le type choisi
                 $result = $this->simulerDispatchDon(
                     $don['id'],
                     $don['besoin_id'],
-                    $don['quantite_restante']
+                    $don['quantite_restante'],
+                    $simulation_type
                 );
                 
                 if (!empty($result['distributions'])) {
@@ -276,6 +287,7 @@ class DonsController
                 'dons' => $dons_non_distribues,
                 'simulation_results' => $simulation_results,
                 'show_validation' => !empty($simulation_results),
+                'simulation_type' => $simulation_type,
                 'csp_nonce' => $csp_nonce
             ]);
         } catch (\Exception $e) {
@@ -287,12 +299,20 @@ class DonsController
     /**
      * Simule le dispatch d'un don SANS modifier la base de données
      */
-    private function simulerDispatchDon($don_id, $besoin_id, $quantite_disponible)
+    private function simulerDispatchDon($don_id, $besoin_id, $quantite_disponible, $simulation_type = 'chrono')
     {
         $donsModel = new DonModels(Flight::db());
         
         // Récupérer tous les besoins des villes pour ce type de besoin
         $besoins_villes = $donsModel->getBesoinsVilleByBesoinId($besoin_id);
+        
+        // Trier selon le type de simulation
+        if ($simulation_type === 'min') {
+            usort($besoins_villes, function($a, $b) {
+                return $a['quantite_restante'] <=> $b['quantite_restante'];
+            });
+        }
+        // Pour 'chrono', on garde l'ordre par défaut (date_besoin ASC)
         
         $distributions = [];
         $quantite_restante_don = $quantite_disponible;
@@ -339,6 +359,9 @@ class DonsController
             
             $donsModel = new DonModels(Flight::db());
             
+            // Récupérer le type de simulation depuis la session ou un paramètre
+            $simulation_type = Flight::request()->data->simulation_type ?? 'chrono';
+            
             // Récupérer tous les dons non distribués
             $dons_non_distribues = $donsModel->getDonsNonDistribues();
             
@@ -355,7 +378,8 @@ class DonsController
                     $don['id'],
                     $don['besoin_id'],
                     $don['quantite_restante'],
-                    $date_distribution
+                    $date_distribution,
+                    $simulation_type
                 );
                 
                 $total_distributions += $distributions_count;
